@@ -36,11 +36,11 @@ public class Driver {
 		String code = args[1];
 		String date = args[2];
 		// Try to get a list of airports
-		Airports airports = ServerInterface.INSTANCE.getAirports(teamName);
-		Collections.sort(airports);
-		for (Airport airport : airports) {
+		//Airports airports = ServerInterface.INSTANCE.getAirports(teamName);
+		//Collections.sort(airports);
+		//for (Airport airport : airports) {
 			//System.out.println(airport.toString());
-		}
+		//}
 		
 		Flights flights = ServerInterface.INSTANCE.getFlights(teamName, code, date);
 		for (Flight flight : flights) {
