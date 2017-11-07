@@ -77,7 +77,12 @@ public class DaoFlight {
 		String flTime;
 		String flDepartureCode;
 		String flDepartureTime;
-		FlightDetails flArrival;
+		String flArrivalCode;
+		String flArrivalTime;
+		String flFirstClassSeating;
+		String flFirstClassPrice;
+		String flCoachSeating;
+		String flCoachPrice;
 		
 		// The airport element has attributes of Name and 3 character airport code
 		Element elementFlight = (Element) nodeFlight;
@@ -96,6 +101,37 @@ public class DaoFlight {
 		elementDepartureTime = (Element)elementDepartureAirport.getElementsByTagName("Time").item(0);
 		flDepartureTime = String.valueOf(getCharacterDataFromElement(elementDepartureTime));
 
+		
+		Element elementArrivalAirport;
+		elementArrivalAirport = (Element)elementFlight.getElementsByTagName("Arrival").item(0);
+		
+		Element elementArrivalCode;
+		elementArrivalCode = (Element)elementArrivalAirport.getElementsByTagName("Code").item(0);
+		flArrivalCode = String.valueOf(getCharacterDataFromElement(elementArrivalCode));
+		
+		Element elementArrivalTime;
+		elementArrivalTime = (Element)elementArrivalAirport.getElementsByTagName("Time").item(0);
+		flArrivalTime = String.valueOf(getCharacterDataFromElement(elementArrivalTime));
+		
+		
+		Element elementSeating;
+		elementSeating = (Element)elementFlight.getElementsByTagName("Seating").item(0);
+		
+		
+		//flTime = elementFlight.getAttributeNode("FlightTime").getValue();
+		
+		Element elementFirstClass;
+		elementFirstClass = (Element)elementSeating.getElementsByTagName("FirstClass").item(0);
+		flFirstClassSeating = String.valueOf(getCharacterDataFromElement(elementFirstClass));
+		flFirstClassPrice = elementFirstClass.getAttributeNode("Price").getValue();
+		
+		Element elementCoach;
+		elementCoach = (Element)elementSeating.getElementsByTagName("Coach").item(0);
+		flCoachSeating = String.valueOf(getCharacterDataFromElement(elementCoach));
+		flCoachPrice = elementCoach.getAttributeNode("Price").getValue();
+		
+		//flArrivalTime = String.valueOf(getCharacterDataFromElement(elementArrivalTime));
+		
 		/**
 		 * Update the Airport object with values from XML node
 		 */
@@ -103,6 +139,12 @@ public class DaoFlight {
 		flight.flightDuration(flTime);
 		flight.departFlightCode(flDepartureCode);
 		flight.departFlightDateTime(flDepartureTime);
+		flight.arrivalFlightCode(flArrivalCode);
+		flight.arrivalFlightDateTime(flArrivalTime);
+		flight.coachPrice(flCoachPrice);
+		flight.coachSeating(flCoachSeating);
+		flight.firstClassPrice(flFirstClassPrice);
+		flight.firstClassSeating(flFirstClassSeating);
 		
 		return flight;
 	}
