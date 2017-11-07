@@ -16,7 +16,8 @@ public class Airplane implements Comparable<Airplane>, Comparator<Airplane>{
 	
 	public Airplane() {
 		mManufacture = "";
-		mCode 
+		mModel = "";
+		//not done yet
 		
 	}
 	
