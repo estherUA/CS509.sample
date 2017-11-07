@@ -7,7 +7,7 @@ public class Airplane implements Comparable<Airplane>, Comparator<Airplane>{
 
 
 	/**
-	 * Airplane attributes as defined by the CS509 server interface XML
+	 * Airplane attributes as defined by the CS509 server interface XML - not done yet
 	 */
 	private String mManufacture;
 	private String mModel;
