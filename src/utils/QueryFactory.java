@@ -49,6 +49,16 @@ public class QueryFactory {
 	}
 
 	/**
+	 *
+	 * @param teamName
+	 * @param code
+	 * @param date
+	 * @return
+	 */
+	public static String getArrivingFlights (String teamName, String code, String date) {
+		return "?team=" + teamName + "&action=list&list_type=arriving&airport=" + code+ "&day="+date;
+	}
+	/**
 	 *????
 	 */
 	public static String getAirplanes (String teamName) {

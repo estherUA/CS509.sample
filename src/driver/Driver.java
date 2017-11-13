@@ -35,8 +35,8 @@ public class Driver {
 		}
 		
 		String teamName = args[0];
-		//String code = args[1];
-		//String date = args[2];
+		String code = args[1];
+		String date = args[2];
 		//Try to get a list of airports
 		//Airports airports = ServerInterface.INSTANCE.getAirports(teamName);
 		//Collections.sort(airports);
@@ -44,18 +44,22 @@ public class Driver {
 			//System.out.println(airport.toString());
 		//}
 		
-		//Flights flights = ServerInterface.INSTANCE.getFlights(teamName, code, date);
-		//for (Flight flight : flights) {
-			//System.out.println(flight.toString());}
+		//Flights departflights = ServerInterface.INSTANCE.getDepartingFlights(teamName, code, date);
+		//for (Flight departflight : flights) {
+			//System.out.println(departflight.toString());}
 
-		Airplanes airplanes = ServerInterface.INSTANCE.getAirplanes(teamName);
-		Collections.sort(airplanes);
-		for (Airplane airplane : airplanes) {
-			System.out.println(airplane.toString());
+		//Flights arrivalflights = ServerInterface.INSTANCE.getArrivingFlights(teamName, code, date);
+		//for (Flight arrivalflight : arrivalflights) {
+			//System.out.println(arrivalflight.toString());}
+
+		//Airplanes airplanes = ServerInterface.INSTANCE.getAirplanes(teamName);
+		//Collections.sort(airplanes);
+		//for (Airplane airplane : airplanes) {
+			//System.out.println(airplane.toString());
 		}
 
 	}
 
 
 
-}
+
