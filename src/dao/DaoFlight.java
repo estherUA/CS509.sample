@@ -31,7 +31,7 @@ public class DaoFlight {
 	 * an Airport object from the XML node string and add the Airport object instance to
 	 * the Airports collection.
 	 * 
-	 * @param xmlAirports XML string containing set of airports 
+	 * @param xmlFlights XML string containing set of airports
 	 * @return [possibly empty] collection of Airports in the xml string
 	 * @throws NullPointerException included to keep signature consistent with other addAll methods
 	 * 
@@ -62,7 +62,7 @@ public class DaoFlight {
 	 * Creates an Airport object from a DOM node
 	 * 
 	 * Processes a DOM Node that describes an Airport and creates an Airport object from the information
-	 * @param nodeAirport is a DOM Node describing an Airport
+	 * @param nodeFlight is a DOM Node describing an Airport
 	 * @return Airport object created from the DOM Node representation of the Airport
 	 * 
 	 * @pre nodeAirport is of format specified by CS509 server API

@@ -5,11 +5,13 @@ package driver;
 
 import java.util.Collections;
 
+import airplane.Airplane;
 import airport.Airport;
 import airport.Airports;
 import dao.ServerInterface;
 import flight.Flight;
 import flight.Flights;
+import airplane.Airplanes;
 
 /**
  * @author blake
@@ -33,18 +35,27 @@ public class Driver {
 		}
 		
 		String teamName = args[0];
-		String code = args[1];
-		String date = args[2];
+		//String code = args[1];
+		//String date = args[2];
 		//Try to get a list of airports
-		Airports airports = ServerInterface.INSTANCE.getAirports(teamName);
-		Collections.sort(airports);
-		for (Airport airport : airports) {
+		//Airports airports = ServerInterface.INSTANCE.getAirports(teamName);
+		//Collections.sort(airports);
+		//for (Airport airport : airports) {
 			//System.out.println(airport.toString());
-		}
+		//}
 		
-		Flights flights = ServerInterface.INSTANCE.getFlights(teamName, code, date);
-		for (Flight flight : flights) {
-			System.out.println(flight.toString());
+		//Flights flights = ServerInterface.INSTANCE.getFlights(teamName, code, date);
+		//for (Flight flight : flights) {
+			//System.out.println(flight.toString());}
+
+		Airplanes airplanes = ServerInterface.INSTANCE.getAirplanes(teamName);
+		Collections.sort(airplanes);
+		for (Airplane airplane : airplanes) {
+			System.out.println(airplane.toString());
 		}
+
 	}
+
+
+
 }

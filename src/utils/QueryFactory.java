@@ -48,4 +48,11 @@ public class QueryFactory {
 		return "?team=" + teamName + "&action=list&list_type=departing&airport=" + code+ "&day="+date; 
 	}
 
+	/**
+	 *????
+	 */
+	public static String getAirplanes (String teamName) {
+		return "?team=" + teamName + "&action=list&list_type=airplanes";
+	}
+
 }

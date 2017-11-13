@@ -13,6 +13,7 @@ import java.net.URL;
 
 import airport.Airports;
 import flight.Flights;
+import airplane.Airplanes;
 import utils.QueryFactory;
 
 
@@ -236,4 +237,52 @@ public enum ServerInterface {
 		return flights;
 		
 	}
+
+	public Airplanes getAirplanes (String teamName) {
+
+		URL url;
+		HttpURLConnection connection;
+		BufferedReader reader;
+		String line;
+		StringBuffer result = new StringBuffer();
+
+		String xmlAirplanes;
+		Airplanes airplanes;
+
+		try {
+			/**
+			 * Create an HTTP connection to the server for a GET
+			 */
+			url = new URL(mUrlBase + QueryFactory.getAirplanes(teamName));
+			connection = (HttpURLConnection) url.openConnection();
+			connection.setRequestMethod("GET");
+			connection.setRequestProperty("User-Agent", teamName);
+
+			/**
+			 * If response code of SUCCESS read the XML string returned
+			 * line by line to build the full return string
+			 */
+			int responseCode = connection.getResponseCode();
+			if (responseCode >= HttpURLConnection.HTTP_OK) {
+				InputStream inputStream = connection.getInputStream();
+				String encoding = connection.getContentEncoding();
+				encoding = (encoding == null ? "UTF-8" : encoding);
+
+				reader = new BufferedReader(new InputStreamReader(inputStream));
+				while ((line = reader.readLine()) != null) {
+					result.append(line);
+				}
+				reader.close();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		xmlAirplanes = result.toString();
+		airplanes = DaoAirplane.addAll(xmlAirplanes);
+		return airplanes;
+	}
+
 }

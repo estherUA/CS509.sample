@@ -98,7 +98,7 @@ public class Airport implements Comparable<Airport>, Comparator<Airport> {
 		}
 		
 		try {
-			tmpLongitude = Double.parseDouble(latitude);
+			tmpLongitude = Double.parseDouble(longitude);
 		} catch (NullPointerException | NumberFormatException ex) {
 			throw new IllegalArgumentException ("Longitude must be between -180.0 and +180.0", ex);
 		}
