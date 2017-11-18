@@ -10,7 +10,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 
+import airport.Airport;
 import airport.Airports;
 import flight.Flights;
 import airplane.Airplanes;
@@ -231,9 +233,11 @@ public enum ServerInterface {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		Airports allAirports = getAirports(teamName);
+		//HashMap airportMap = getAirportsMap(allAirports);
+		HashMap<String, Airport> airportMap = DaoAirport.getAirportsMap(allAirports);
 		xmlFlights = result.toString();
-		flights = DaoFlight.addAll(xmlFlights);
+		flights = DaoFlight.addAll(xmlFlights, airportMap);
 		return flights;
 		
 	}
