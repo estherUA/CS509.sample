@@ -12,7 +12,7 @@ public class Flight implements Comparable<Flight>, Comparator<Flight>{
 	private String mDepartFlightDateTime;
 	private String mArrivalFlightCode;
 	private String mArrivalFlightDateTime;
-	private int mFirstClassSeating;
+	private String mFirstClassSeating;
 	private String mFirstClassPrice;
 	private String mCoachSeating;
 	private String mCoachPrice;
@@ -35,7 +35,7 @@ public class Flight implements Comparable<Flight>, Comparator<Flight>{
 		mDepartFlightDateTime = "";
 		mArrivalFlightCode = "";
 		mArrivalFlightDateTime = "";
-		mFirstClassSeating = 0;
+		mFirstClassSeating = "";
 		mFirstClassPrice = "";
 		mCoachSeating = "";
 		mCoachPrice = "";
@@ -57,7 +57,7 @@ public class Flight implements Comparable<Flight>, Comparator<Flight>{
 	 * @post member attributes are initialized with input parameter values
 	 * @throws IllegalArgumentException is any parameter is invalid
 	 */
-	public Flight (String flightNumber, int flightDuration, String departFlightCode, String departFlightDateTime, String arrivalFlightCode, String arrivalFlightDateTime, int firstClassSeating, String firstClassPrice, String coachSeating, String coachPrice, String departLocalTime, String arrivalLocalTime) {
+	public Flight (String flightNumber, int flightDuration, String departFlightCode, String departFlightDateTime, String arrivalFlightCode, String arrivalFlightDateTime, String firstClassSeating, String firstClassPrice, String coachSeating, String coachPrice, String departLocalTime, String arrivalLocalTime) {
 		if (!isValidFlightNumber(flightNumber))
 			throw new IllegalArgumentException(flightNumber);
 		if (!isValidFlightDuration(flightDuration)) 
@@ -106,7 +106,7 @@ public class Flight implements Comparable<Flight>, Comparator<Flight>{
 		sb.append("Departure: ").append(mDepartFlightCode).append(", ");
 		sb.append("Departure Date Time: ").append(mDepartFlightDateTime).append(", ");
 		sb.append("Arrival: ").append(mArrivalFlightCode).append(", ");
-		sb.append("FCSeating: ").append(String.valueOf(mFirstClassSeating)).append(", ");
+		sb.append("FCSeating: ").append(mFirstClassSeating).append(", ");
 		sb.append("FCPrice: ").append(mFirstClassPrice).append(", ");
 		sb.append("CSeating: ").append(mCoachSeating).append(", ");
 		sb.append("CPrice: ").append(mCoachPrice).append(", ");
@@ -250,15 +250,15 @@ public class Flight implements Comparable<Flight>, Comparator<Flight>{
 	}
 	
 	
-	public void firstClassSeating (int firstClassSeating) {
+	public void firstClassSeating (String firstClassSeating) {
 		if (isValidFirstClassSeating(firstClassSeating))
 			mFirstClassSeating = firstClassSeating;
 		else
-			throw new IllegalArgumentException (Integer.toString(firstClassSeating));
+			throw new IllegalArgumentException (firstClassSeating);
 	}
 	
 
-	public int firstClassSeating () {
+	public String firstClassSeating () {
 		return mFirstClassSeating;
 	}
 	
@@ -484,20 +484,20 @@ public class Flight implements Comparable<Flight>, Comparator<Flight>{
 		return true;
 	}
 	
-	public boolean isValidFirstClassSeating (int firstClassSeating) {
-		if ((firstClassSeating == 0) || (firstClassSeating < 1))
+	public boolean isValidFirstClassSeating (String firstClassSeating) {
+		if ((firstClassSeating == null) || (firstClassSeating == ""))
 			return false;
 		return true;
 	}
 	
 	public boolean isValidArrivalLocalTime (String arrivalLocalTime) {
-		if ((arrivalLocalTime == null) || (arrivalLocalTime == null))
+		if ((arrivalLocalTime == null) || (arrivalLocalTime == ""))
 			return false;
 		return true;
 	}
 	
 	public boolean isValidDepartureLocalTime (String departureLocalTime) {
-		if ((departureLocalTime == null) || (departureLocalTime == null))
+		if ((departureLocalTime == null) || (departureLocalTime == ""))
 			return false;
 		return true;
 	}

@@ -89,7 +89,7 @@ public class DaoFlight {
 		String flDepartureTime;
 		String flArrivalCode;
 		String flArrivalTime;
-		int flFirstClassSeating;
+		String flFirstClassSeating;
 		String flFirstClassPrice;
 		String flCoachSeating;
 		String flCoachPrice;
@@ -136,7 +136,7 @@ public class DaoFlight {
 		
 		Element elementFirstClass;
 		elementFirstClass = (Element)elementSeating.getElementsByTagName("FirstClass").item(0);
-		flFirstClassSeating = Integer.valueOf(String.valueOf(getCharacterDataFromElement(elementFirstClass)));
+		flFirstClassSeating = String.valueOf(getCharacterDataFromElement(elementFirstClass));
 		flFirstClassPrice = elementFirstClass.getAttributeNode("Price").getValue();
 		
 		Element elementCoach;
