@@ -491,13 +491,13 @@ public class Flight implements Comparable<Flight>, Comparator<Flight>{
 	}
 	
 	public boolean isValidArrivalLocalTime (String arrivalLocalTime) {
-		if ((arrivalLocalTime == null) || (arrivalLocalTime == ""))
+		if ((arrivalLocalTime == null))
 			return false;
 		return true;
 	}
 	
 	public boolean isValidDepartureLocalTime (String departureLocalTime) {
-		if ((departureLocalTime == null) || (departureLocalTime == ""))
+		if ((departureLocalTime == null))
 			return false;
 		return true;
 	}

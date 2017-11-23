@@ -25,8 +25,7 @@ public class LocalTimeConverter {
 		BufferedReader reader;
 		String line;
 		StringBuffer result = new StringBuffer();
-		
-		String jsonTimezones;
+	
 		String TimeZoneId;
 		//Airports airports;
 
@@ -60,16 +59,21 @@ public class LocalTimeConverter {
 			e.printStackTrace();
 		}
 		
-		jsonTimezones = result.toString();
-		
-		try {
-			JSONObject  jsonObject = new JSONObject(jsonTimezones);
-			TimeZoneId = jsonObject.getString("timeZoneId");
-			
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			TimeZoneId="";
-			e.printStackTrace();
+		JSONObject jsonObject = new JSONObject(result);
+		if(jsonObject.has("errorMessage")) {
+			TimeZoneId = "";
+		} else {
+			try {
+				
+				TimeZoneId = jsonObject.getString("timeZoneId");
+				System.out.println("Timezone " + jsonObject);
+				
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				TimeZoneId="";
+				//e.setStackTrace(TimeZoneId);
+				//e.printStackTrace(); //Failing as of 11/21/2017
+			}
 		}
 		// 
 		return TimeZoneId;

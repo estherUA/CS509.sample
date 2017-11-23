@@ -93,8 +93,8 @@ public class DaoFlight {
 		String flFirstClassPrice;
 		String flCoachSeating;
 		String flCoachPrice;
-		String flDepartAirportLocalTime;
-		String flArrivalAirportLocalTime;
+		String flDepartAirportLocalTime = "";
+		String flArrivalAirportLocalTime = "";
 		DateFormat formatter= new SimpleDateFormat("MM/dd/yyyy HH:mm:ss Z");
 		
 		
@@ -158,11 +158,12 @@ public class DaoFlight {
 		
 		LocalTimeConverter dltc = new LocalTimeConverter();
 		String departTimeZone = dltc.convertLocalTime(dlon, dlat, Long.toString(dts));
+		//System.out.println("Message: " +departTimeZone + " Error probably exceeded query limit");
 		
-		//DateFormat formatter= new SimpleDateFormat("MM/dd/yyyy HH:mm:ss Z");
-		formatter.setTimeZone(TimeZone.getTimeZone(departTimeZone));
-		
-		flDepartAirportLocalTime = formatter.format(departureTimeMil);
+		if(departTimeZone != "") {
+			formatter.setTimeZone(TimeZone.getTimeZone(departTimeZone));
+			flDepartAirportLocalTime = formatter.format(departureTimeMil);
+		}
 		
 		//Arrival Airport
 		Airport arrivalAirport = airportMap.get(flArrivalCode);
@@ -174,12 +175,10 @@ public class DaoFlight {
 		
 		LocalTimeConverter altc = new LocalTimeConverter();
 		String arrivalTimeZone = altc.convertLocalTime(alon, alat, Long.toString(ats));
-		
-		formatter.setTimeZone(TimeZone.getTimeZone(arrivalTimeZone));
-		flArrivalAirportLocalTime = formatter.format(arrivalTimeMil);
-		
-		
-		
+		if(arrivalTimeZone != "") {
+			formatter.setTimeZone(TimeZone.getTimeZone(arrivalTimeZone));
+			flArrivalAirportLocalTime = formatter.format(arrivalTimeMil);
+		}
 		
 		/**
 		 * Update the Airport object with values from XML node
