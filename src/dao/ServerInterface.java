@@ -190,7 +190,7 @@ public enum ServerInterface {
 		return true;
 	}
 	
-	public Flights getFlights (String teamName, String code, String date) {
+	public Flights getDepartingFlights (String teamName, String code, String date) {
 
 		URL url;
 		HttpURLConnection connection;
@@ -236,6 +236,53 @@ public enum ServerInterface {
 		flights = DaoFlight.addAll(xmlFlights);
 		return flights;
 		
+	}
+	public Flights getArrivingFlights (String teamName, String code, String date) {
+
+		URL url;
+		HttpURLConnection connection;
+		BufferedReader reader;
+		String line;
+		StringBuffer result = new StringBuffer();
+
+		String xmlFlights;
+		Flights flights;
+
+		try {
+			/**
+			 * Create an HTTP connection to the server for a GET
+			 */
+			url = new URL(mUrlBase + QueryFactory.getArrivingFlights(teamName, code, date));
+			connection = (HttpURLConnection) url.openConnection();
+			connection.setRequestMethod("GET");
+			connection.setRequestProperty("User-Agent", teamName);
+
+			/**
+			 * If response code of SUCCESS read the XML string returned
+			 * line by line to build the full return string
+			 */
+			int responseCode = connection.getResponseCode();
+			if (responseCode >= HttpURLConnection.HTTP_OK) {
+				InputStream inputStream = connection.getInputStream();
+				String encoding = connection.getContentEncoding();
+				encoding = (encoding == null ? "UTF-8" : encoding);
+
+				reader = new BufferedReader(new InputStreamReader(inputStream));
+				while ((line = reader.readLine()) != null) {
+					result.append(line);
+				}
+				reader.close();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		xmlFlights = result.toString();
+		flights = DaoFlight.addAll(xmlFlights);
+		return flights;
+
 	}
 
 	public Airplanes getAirplanes (String teamName) {

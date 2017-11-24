@@ -12,10 +12,13 @@ public class Flight implements Comparable<Flight>, Comparator<Flight>{
 	private String mDepartFlightDateTime;
 	private String mArrivalFlightCode;
 	private String mArrivalFlightDateTime;
+
 	private String mFirstClassSeating;
-	private String mFirstClassPrice;
 	private String mCoachSeating;
+
+	private String mFirstClassPrice;
 	private String mCoachPrice;
+
 	
 	//private FlightDetails mDepartFlight;
 	//private FlightDetails mArriveFlight;
