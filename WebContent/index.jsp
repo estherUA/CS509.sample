@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="driver.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,8 +18,20 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-	<div class="container">
-	  <!-- Content here -->
+	<h1>Hello World!</h1>
+	<ul>
+	<% 
+		Driver driver = new Driver();
+		String name = driver.sayTeamName("Smart Design");
+		for(int i =0; i<5; i++) {
+		%>
+		<li><%=name%> =This should work! <%= i %></li>
+		<%	
+		}
+	%>
+	</ul>
+	<!-- div class="container">
+	  <!-- Content here ->
 	  <div class="row">
 	  	<div class="col-md-12 mb-6">
 	  		<img src="resources/img/WorldPlaneInc.png" style="float: right;"/>
@@ -67,7 +80,7 @@
 			
 		</div>
 	  </div>
-	</div>
+	</div-->
 	<script>
 	// Example starter JavaScript for disabling form submissions if there are invalid fields
 	(function() {

@@ -23,12 +23,13 @@ public class Driver {
 
 	/**
 	 * Entry point for CS509 sample code driver
-	 * 
-	 * This driver will retrieve the list of airports from the CS509 server and print the list 
+	 * <p>
+	 * This driver will retrieve the list of airports from the CS509 server and print the list
 	 * to the console sorted by 3 character airport code
-	 * 
+	 *
 	 * @param args is the arguments passed to java vm in format of "CS509.sample teamName" where teamName is a valid team
 	 */
+
 
 	public static void main(String[] args) {
 		if (args.length < 1) {
@@ -38,34 +39,43 @@ public class Driver {
 		}
 
 
-
 		String teamName = args[0];
 
+
 		UserInput ui = new UserInput();
+		//userInput
 		String code = ui.getAirportCode();
 		//String code = args[1];
 		String date = ui.getDeparturedate();
 		//String date = args[2];
+
+		//from and to airport
+		//String departureCode = args[1];
+		//String date = args[2];
+		//String arrivalCode = args[3];
+
 		//Try to get a list of airports
-		//Airports airports = ServerInterface.INSTANCE.getAirports(teamName);
-		//Collections.sort(airports);
-		//for (Airport airport : airports) {
-			//System.out.println(airport.toString());
-		//}
-		
+		/*Airports airports = ServerInterface.INSTANCE.getAirports(teamName);
+		Collections.sort(airports);
+		for (Airport airport : airports) {
+			System.out.println(airport.toString());
+		}*/
+
+
 		Flights departflights = ServerInterface.INSTANCE.getDepartingFlights(teamName, code, date);
 		for (Flight departflight : departflights) {
-			System.out.println(departflight.toString());}
-		
+			System.out.println(departflight.toString());
+		}
+
 
 		//Flights arrivalflights = ServerInterface.INSTANCE.getArrivingFlights(teamName, code, date);
 		//for (Flight arrivalflight : arrivalflights) {
-			//System.out.println(arrivalflight.toString());}
+		//System.out.println(arrivalflight.toString());}
 
 		//Airplanes airplanes = ServerInterface.INSTANCE.getAirplanes(teamName);
 		//Collections.sort(airplanes);
 		//for (Airplane airplane : airplanes) {
-			//System.out.println(airplane.toString());
+		//System.out.println(airplane.toString());
 
 
 		String flightnumber = ui.getFlightNumber();
@@ -74,11 +84,18 @@ public class Driver {
 		System.out.println(flightnumber);
 
 
+//		Flights flights = ServerInterface.INSTANCE.getFlights(teamName, departureCode, date, arrivalCode);
+//		for (Flight flight : flights) {
+//			System.out.println(flight.toString());}
 
-		}
+		/*Airplanes airplanes = ServerInterface.INSTANCE.getAirplanes(teamName);
+		Collections.sort(airplanes);
+		for (Airplane airplane : airplanes) {
+			System.out.println(airplane.toString());
+		}*/
+
 
 	}
 
 
-
-
+}

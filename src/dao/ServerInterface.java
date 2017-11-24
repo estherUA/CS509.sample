@@ -10,9 +10,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 
+import airport.Airport;
 import airport.Airports;
+import flight.Flight;
 import flight.Flights;
+import flight.connectingFlights;
 import airplane.Airplanes;
 import utils.QueryFactory;
 
@@ -231,9 +235,11 @@ public enum ServerInterface {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		Airports allAirports = getAirports(teamName);
+		//HashMap airportMap = getAirportsMap(allAirports);
+		HashMap<String, Airport> airportMap = DaoAirport.getAirportsMap(allAirports);
 		xmlFlights = result.toString();
-		flights = DaoFlight.addAll(xmlFlights);
+		flights = DaoFlight.addAll(xmlFlights, airportMap);
 		return flights;
 		
 	}
@@ -285,6 +291,106 @@ public enum ServerInterface {
 
 	}
 
+	
+	/*
+	 */ 
+	 	public Flights getFlights (String teamName, String departureAirportCode, String date, String destinationAirportCode) {
+
+		URL url;
+		HttpURLConnection connection;
+		BufferedReader reader;
+		String line;
+		StringBuffer departingResults = new StringBuffer();
+		StringBuffer arrivingResults = new StringBuffer();
+		
+		String xmlDepartingFlights;
+		String xmlArrivingFlights;
+		Flights departingFlights;
+		Flights arrivingFlights;
+
+		try {
+			/**
+			 * Create an HTTP connection to the server for a GET 
+			 */
+			url = new URL(mUrlBase + QueryFactory.getDepartingFlights(teamName, departureAirportCode, date));
+			connection = (HttpURLConnection) url.openConnection();
+			connection.setRequestMethod("GET");
+			connection.setRequestProperty("User-Agent", teamName);
+
+			/**
+			 * If response code of SUCCESS read the XML string returned
+			 * line by line to build the full return string
+			 */
+			int responseCode = connection.getResponseCode();
+			if (responseCode >= HttpURLConnection.HTTP_OK) {
+				InputStream inputStream = connection.getInputStream();
+				String encoding = connection.getContentEncoding();
+				encoding = (encoding == null ? "UTF-8" : encoding);
+
+				reader = new BufferedReader(new InputStreamReader(inputStream));
+				while ((line = reader.readLine()) != null) {
+					departingResults.append(line);
+				}
+				reader.close();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		Airports allAirports = getAirports(teamName);
+		HashMap<String, Airport> airportMap = DaoAirport.getAirportsMap(allAirports);
+		xmlDepartingFlights = departingResults.toString();
+		departingFlights = DaoFlight.addAll(xmlDepartingFlights, airportMap);
+		
+		
+		// Get Flights arriving at a particular Airport
+		try {
+			/**
+			 * Create an HTTP connection to the server for a GET 
+			 */
+			url = new URL(mUrlBase + QueryFactory.getArrivingFlights(teamName, destinationAirportCode, date));
+			connection = (HttpURLConnection) url.openConnection();
+			connection.setRequestMethod("GET");
+			connection.setRequestProperty("User-Agent", teamName);
+
+			/**
+			 * If response code of SUCCESS read the XML string returned
+			 * line by line to build the full return string
+			 */
+			int responseCode = connection.getResponseCode();
+			if (responseCode >= HttpURLConnection.HTTP_OK) {
+				InputStream inputStream = connection.getInputStream();
+				String encoding = connection.getContentEncoding();
+				encoding = (encoding == null ? "UTF-8" : encoding);
+
+				reader = new BufferedReader(new InputStreamReader(inputStream));
+				while ((line = reader.readLine()) != null) {
+					arrivingResults.append(line);
+				}
+				reader.close();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Airports allDepartingAirports = getAirports(teamName);
+		HashMap<String, Airport> airportDepartureMap = DaoAirport.getAirportsMap(allDepartingAirports);
+		xmlArrivingFlights = arrivingResults.toString();
+		arrivingFlights = DaoFlight.addAll(xmlArrivingFlights, airportDepartureMap);
+		
+		connectingFlights calculateConnectingFlights = new connectingFlights();
+		Flights finalFlights = new Flights();
+		finalFlights = calculateConnectingFlights.getConnectingFlights(departureAirportCode, destinationAirportCode, departingFlights, arrivingFlights, teamName, date);
+		
+		//Some magic happens here
+		
+		return finalFlights;
+		
+	}
+	 /* */
 	public Airplanes getAirplanes (String teamName) {
 
 		URL url;
