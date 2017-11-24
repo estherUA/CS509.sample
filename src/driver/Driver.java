@@ -27,6 +27,10 @@ public class Driver {
 	 * 
 	 * @param args is the arguments passed to java vm in format of "CS509.sample teamName" where teamName is a valid team
 	 */
+	public String sayTeamName (String name) {
+		return "Hello " + name;
+	}
+	
 	public static void main(String[] args) {
 		if (args.length < 1) {
 			System.err.println("usage: CS509.sample teamName");
@@ -35,24 +39,25 @@ public class Driver {
 		}
 		
 		String teamName = args[0];
-		//String code = args[1];
-		//String date = args[2];
+		String departureCode = args[1];
+		String date = args[2];
+		String arrivalCode = args[3];
 		//Try to get a list of airports
-		//Airports airports = ServerInterface.INSTANCE.getAirports(teamName);
-		//Collections.sort(airports);
-		//for (Airport airport : airports) {
-			//System.out.println(airport.toString());
-		//}
+		/*Airports airports = ServerInterface.INSTANCE.getAirports(teamName);
+		Collections.sort(airports);
+		for (Airport airport : airports) {
+			System.out.println(airport.toString());
+		}*/
 		
-		//Flights flights = ServerInterface.INSTANCE.getFlights(teamName, code, date);
-		//for (Flight flight : flights) {
-			//System.out.println(flight.toString());}
+		Flights flights = ServerInterface.INSTANCE.getFlights(teamName, departureCode, date, arrivalCode);
+		for (Flight flight : flights) {
+			System.out.println(flight.toString());}
 
-		Airplanes airplanes = ServerInterface.INSTANCE.getAirplanes(teamName);
+		/*Airplanes airplanes = ServerInterface.INSTANCE.getAirplanes(teamName);
 		Collections.sort(airplanes);
 		for (Airplane airplane : airplanes) {
 			System.out.println(airplane.toString());
-		}
+		}*/
 
 	}
 
