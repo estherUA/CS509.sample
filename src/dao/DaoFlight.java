@@ -158,7 +158,6 @@ public class DaoFlight {
 		
 		LocalTimeConverter dltc = new LocalTimeConverter();
 		String departTimeZone = dltc.convertLocalTime(dlon, dlat, Long.toString(dts));
-		//System.out.println("Message: " +departTimeZone + " Error probably exceeded query limit");
 		
 		if(departTimeZone != "") {
 			formatter.setTimeZone(TimeZone.getTimeZone(departTimeZone));
@@ -175,6 +174,7 @@ public class DaoFlight {
 		
 		LocalTimeConverter altc = new LocalTimeConverter();
 		String arrivalTimeZone = altc.convertLocalTime(alon, alat, Long.toString(ats));
+		
 		if(arrivalTimeZone != "") {
 			formatter.setTimeZone(TimeZone.getTimeZone(arrivalTimeZone));
 			flArrivalAirportLocalTime = formatter.format(arrivalTimeMil);

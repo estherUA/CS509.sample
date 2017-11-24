@@ -12,7 +12,8 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 public class LocalTimeConverter {
-	private String GoogleAPIKey = "AIzaSyAD9dZgmw9HV97q1rbJG_wCPt2eVHL-B_A";
+	private String GoogleAPIKey1 = "AIzaSyAD9dZgmw9HV97q1rbJG_wCPt2eVHL-B_A";
+	private String GoogleAPIKey = "AIzaSyCO642Oj4uXv7t-v8LtnSruS45DE0i6PDA";
 	//private String Longitude;
 	//private String Latitude;
 	
@@ -50,6 +51,7 @@ public class LocalTimeConverter {
 				reader = new BufferedReader(new InputStreamReader(inputStream));
 				while ((line = reader.readLine()) != null) {
 					result.append(line);
+					
 				}
 				reader.close();
 			}
@@ -58,15 +60,19 @@ public class LocalTimeConverter {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		JSONObject jsonObject = new JSONObject(result);
-		if(jsonObject.has("errorMessage")) {
-			TimeZoneId = "";
-		} else {
+		String jsonString = result.toString();
+		JSONObject jsonObject;
+		try {
+			jsonObject = new JSONObject(jsonString);
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			jsonObject = null;
+			e1.printStackTrace();
+		}
+
 			try {
 				
 				TimeZoneId = jsonObject.getString("timeZoneId");
-				System.out.println("Timezone " + jsonObject);
 				
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
@@ -74,7 +80,6 @@ public class LocalTimeConverter {
 				//e.setStackTrace(TimeZoneId);
 				//e.printStackTrace(); //Failing as of 11/21/2017
 			}
-		}
 		// 
 		return TimeZoneId;
 		
