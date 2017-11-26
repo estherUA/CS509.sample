@@ -285,8 +285,16 @@ public enum ServerInterface {
 			e.printStackTrace();
 		}
 
+		//xmlFlights = result.toString();
+
+		//flights = DaoFlight.addAll(xmlFlights);
+
+
+		//?
+		Airports allAirports = getAirports(teamName);
+		HashMap<String, Airport> airportMap = DaoAirport.getAirportsMap(allAirports);
 		xmlFlights = result.toString();
-		flights = DaoFlight.addAll(xmlFlights);
+		flights = DaoFlight.addAll(xmlFlights, airportMap);
 		return flights;
 
 	}

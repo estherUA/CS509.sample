@@ -136,13 +136,20 @@ public class DaoFlight {
 		
 		Element elementFirstClass;
 		elementFirstClass = (Element)elementSeating.getElementsByTagName("FirstClass").item(0);
-		flFirstClassSeating = String.valueOf(getCharacterDataFromElement(elementFirstClass));
+
+		flFirstClassSeating = getCharacterDataFromElement(elementFirstClass);
+		// delete the $ mark from string
 		flFirstClassPrice = elementFirstClass.getAttributeNode("Price").getValue();
+
+		String firstClassPrice=flFirstClassPrice.replaceAll("[^.a-zA-z0-9_-]", "");
+
 		
 		Element elementCoach;
 		elementCoach = (Element)elementSeating.getElementsByTagName("Coach").item(0);
 		flCoachSeating = String.valueOf(String.valueOf(getCharacterDataFromElement(elementCoach)));
 		flCoachPrice = elementCoach.getAttributeNode("Price").getValue();
+		String coachPrice = flCoachPrice.replaceAll("[^.a-zA-z0-9_-]", "");
+
 		
 		//flArrivalTime = String.valueOf(getCharacterDataFromElement(elementArrivalTime));
 		
@@ -189,12 +196,15 @@ public class DaoFlight {
 		flight.departFlightDateTime(flDepartureTime);
 		flight.arrivalFlightCode(flArrivalCode);
 		flight.arrivalFlightDateTime(flArrivalTime);
-		flight.coachPrice(flCoachPrice);
+
 		flight.coachSeating(flCoachSeating);
-		flight.firstClassPrice(flFirstClassPrice);
 		flight.firstClassSeating(flFirstClassSeating);
+
 		flight.departLocalTime(flDepartAirportLocalTime);
 		flight.arrivalLocalTime(flArrivalAirportLocalTime);
+
+		flight.coachPrice(coachPrice);
+		flight.firstClassPrice(firstClassPrice);
 		
 		return flight;
 	}

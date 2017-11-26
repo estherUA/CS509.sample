@@ -44,10 +44,12 @@ public class Driver {
 
 		UserInput ui = new UserInput();
 		//userInput
-		String code = ui.getAirportCode();
-		//String code = args[1];
-		String date = ui.getDeparturedate();
-		//String date = args[2];
+		//String departureCode= ui.getDepartureCode();
+		String departureCode = args[1];
+		//String departuredate = ui.getDeparturedate();
+		String departuredate = args[2];
+		String arrivalCode = args[3];
+
 
 		//from and to airport
 		//String departureCode = args[1];
@@ -61,11 +63,12 @@ public class Driver {
 			System.out.println(airport.toString());
 		}*/
 
+//
+//		Flights departflights = ServerInterface.INSTANCE.getDepartingFlights(teamName, departureCode, departuredate);
+//		for (Flight departflight : departflights) {
+//			System.out.println(departflight.toString());
+//		}
 
-		Flights departflights = ServerInterface.INSTANCE.getDepartingFlights(teamName, code, date);
-		for (Flight departflight : departflights) {
-			System.out.println(departflight.toString());
-		}
 
 
 		//Flights arrivalflights = ServerInterface.INSTANCE.getArrivingFlights(teamName, code, date);
@@ -77,16 +80,16 @@ public class Driver {
 		//for (Airplane airplane : airplanes) {
 		//System.out.println(airplane.toString());
 
+//
+//		String flightnumber = ui.getFlightNumber();
+//
+//		System.out.println("Desired flight number: \r");
+//		System.out.println(flightnumber);
 
-		String flightnumber = ui.getFlightNumber();
 
-		System.out.println("Desired flight number: \r");
-		System.out.println(flightnumber);
-
-
-//		Flights flights = ServerInterface.INSTANCE.getFlights(teamName, departureCode, date, arrivalCode);
-//		for (Flight flight : flights) {
-//			System.out.println(flight.toString());}
+		Flights flights = ServerInterface.INSTANCE.getFlights(teamName, departureCode, departuredate, arrivalCode);
+		for (Flight flight : flights) {
+			System.out.println(flight.toString());}
 
 		/*Airplanes airplanes = ServerInterface.INSTANCE.getAirplanes(teamName);
 		Collections.sort(airplanes);
