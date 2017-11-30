@@ -94,9 +94,18 @@ public class UserInput {
     }
 
 
-    public String getAirportCode(){
+    public String getDepartureCode(){
         Scanner scan = new Scanner(System.in);
         System.out.println("Enter departure airport: \r");
+        String airport = scan.next();
+        //int i = Integer.parseInt(s);
+        //int flightnumber = Integer.parseInt(br.readLine());
+        return airport;
+    }
+
+    public String getArrivalCode(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter arrival airport: \r");
         String airport = scan.next();
         //int i = Integer.parseInt(s);
         //int flightnumber = Integer.parseInt(br.readLine());

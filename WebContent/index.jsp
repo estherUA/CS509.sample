@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,62 +18,86 @@
 </head>
 <body>
 	<div class="container">
-	  <!-- Content here -->
-	  <div class="row">
-	  	<div class="col-md-12 mb-6">
-	  		<img src="resources/img/WorldPlaneInc.png" style="float: right;"/>
-	  	</div>
-	  	<form class="container" id="needs-validation" novalidate method="get">
-		  <div class="row">
-		    <div class="col-md-6 mb-3">
-		      <label for="validationCustom01">Departure Airport</label>
-		      <input type="text" name="departureAirport" class="form-control" id="validationCustom01" placeholder="First name" value="BOS" required>
-		    </div>
-		    <div class="col-md-6 mb-3 arrival hidden">
-		      <label for="validationCustom02">Arrival Airport</label>
-		      <input type="text" name="arrivalAirport" class="form-control" id="validationCustom02" placeholder="Last name" value="SFC" required>
-		    </div>
-		  </div>
-		  <div class="row">
-		    <div class="col-md-6 mb-3">
-		      <label for="validationCustom03">Departure Date</label>
-		      <input type="date" name="departureDate" class="form-control" id="validationCustom03" placeholder="" required>
-		      <div class="invalid-feedback">
-		        Please provide a valid city.
-		      </div>
-		    </div>
-		    <div class="col-md-6 mb-3 arrival hidden">
-		      <label for="validationCustom04">Arrival Date</label>
-		      <input type="date" name="arrivalAirport" class="form-control" id="validationCustom04" placeholder="State" required>
-		      <div class="invalid-feedback">
-		        Please provide a valid state.
-		      </div>
-		    </div>
-		    <div class="col-md-6 mb-3">
-		    		<label for="">Round Trip?</label>
-		      	<input type="checkbox" name="roundTrip" class="" id="roundTrip">
-		    </div>
-		  </div>
-		  <button class="btn btn-primary" id="returnFlights" type="submit" value="getFlights">Submit form</button>
+	<!-- Content here -->
+	<div class="row">
+		<div class="col-md-12 mb-6">
+			<img src="resources/img/WorldPlaneInc.png" style="float: right;"/>
+		</div>
+		<form class="container" id="needs-validation" novalidate method="get">
+			<div class="row">
+				<div class="col-md-6 mb-3">
+					<label for="validationCustom01">Departure Airport</label>
+					<input type="text" name="departureAirport" class="form-control" id="departCode" placeholder="First name" value="BOS" required>
+				</div>
+				<div class="col-md-6 mb-3">
+					<label for="validationCustom02">Arrival Airport</label>
+					<input type="text" name="arrivalAirport" class="form-control" id="arrivalCode" placeholder="Last name" value="JFK" required>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 mb-3">
+					<label for="validationCustom03">Departure Date</label>
+					<input type="date" name="departureDate" class="form-control" id="departDate" placeholder="" required>
+				<div class="invalid-feedback">
+				Please provide a valid city.
+				</div>
+			</div>
+			<div class="col-md-6 mb-3 arrival hidden">
+				<label for="validationCustom04">Arrival Date</label>
+				<input type="date" name="arrivalAirport" class="form-control" id="arrivalDate" placeholder="State" required>
+			<div class="invalid-feedback">
+				Please provide a valid state.
+				</div>
+			</div>
+			<div class="col-md-6 mb-3">
+				<label for="">Round Trip?</label>
+				<input type="checkbox" name="roundTrip" class="" id="roundTrip">
+			</div>
+		</div>
+		<button class="btn btn-primary" id="returnFlights" type="submit" value="getFlights">Submit form</button>
 		</form>
 		
 		<div id="displayTable">
-			<table class="table table-bordered">
-				<tr>
-					<td></td>
-				</tr>
-				
-			</table>
+			
 			
 		</div>
-	  </div>
 	</div>
+</div>
+	<strong>Ajax Response</strong>:
+	<div id="ajaxGetUserServletResponse"></div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#returnFlights').click(function() {
+				console.log("Departure: ", $('#departCode').val());
+				$.ajax({
+					url : 'GetFlightInfoServlet',
+					data : {
+						//arrivalDate : $('#arrivalDate').val(),
+						departureCode : $('#departCode').val(),
+						arrivalCode : $('#arrivalCode').val(),
+						departDate:  $('#departDate').val().replace(/-/g, '_')
+					},
+					success : function(responseText) {
+						$('#ajaxGetUserServletResponse').text(responseText);
+					}
+				});
+			});
+			
+			$( "#roundTrip" ).click(function() {
+				if($("#roundTrip").is(':checked')){
+					$(".arrival").removeClass('hidden');
+				} else {
+					$(".arrival").addClass('hidden');
+				}
+			});
+		});
+	</script>
 	<script>
 	// Example starter JavaScript for disabling form submissions if there are invalid fields
 	(function() {
 	  'use strict';
 	
-	  window.addEventListener('load', function() {
+	window.addEventListener('load', function() {
 	    var form = document.getElementById('needs-validation');
 	    form.addEventListener('submit', function(event) {
 	      if (form.checkValidity() === false) {
@@ -84,18 +108,6 @@
 	    }, false);
 	  }, false);
 	})();
-	</script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$( "#roundTrip" ).click(function() {
-				if($("#roundTrip").is(':checked')){
-					$(".arrival").removeClass('hidden');
-				} else {
-					$(".arrival").addClass('hidden');
-				}
-			});
-			
-		});
 	</script>
 </body>
 </html>

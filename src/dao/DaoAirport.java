@@ -5,6 +5,7 @@ package dao;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.HashMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -155,5 +156,16 @@ public class DaoAirport {
 	        return cd.getData();
 	      }
 	      return "";
+	}
+	
+	public static HashMap<String, Airport> getAirportsMap(Airports airports) {
+		 HashMap <String,Airport> CA = new HashMap<String, Airport>();
+		 for (int i = 0; i < airports.size(); i++) {
+			 String airportCode = airports.get(i).code();
+			 Airport airport = airports.get(i);
+			 
+			 CA.put(airportCode, airport);
+		 }
+		 return CA;
 	}
 }
