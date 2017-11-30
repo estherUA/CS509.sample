@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SmartDesignReservationSystem.iml" filepath="$PROJECT_DIR$/SmartDesignReservationSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CS509.sample.iml" filepath="$PROJECT_DIR$/CS509.sample.iml" />
     </modules>
   </component>
 </project>

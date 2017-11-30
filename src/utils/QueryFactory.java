@@ -56,6 +56,7 @@ public class QueryFactory {
 		return "?team=" + teamName + "&action=list&list_type=arriving&airport=" + code+ "&day="+date; 
 	}
 	
+
 	/**
 	 *????
 	 */
