@@ -3,14 +3,19 @@
  */
 package driver;
 
+import java.util.ArrayList;
 import java.util.Collections;
 
 import airplane.Airplane;
 import airport.Airport;
 import airport.Airports;
 import dao.ServerInterface;
+import flight.ConnectingFlight;
+import flight.ConnectingFlights;
+import flight.FindFlights;
 import flight.Flight;
 import flight.Flights;
+import flight.ValidFlights;
 import airplane.Airplanes;
 
 /**
@@ -49,10 +54,15 @@ public class Driver {
 			System.out.println(airport.toString());
 		}*/
 		
-		Flights flights = ServerInterface.INSTANCE.getFlights(teamName, departureCode, date, arrivalCode);
+		/*Flights flights = ServerInterface.INSTANCE.getDepartingFlights(teamName, departureCode, date);
 		for (Flight flight : flights) {
-			System.out.println(flight.toString());}
-
+			System.out.println(flight.toString());}*/
+		
+		FindFlights findFlights = new FindFlights();
+		ArrayList<ValidFlights> allFlights = findFlights.getFlights(departureCode, arrivalCode, date);
+		
+		System.out.println("All Flights: "+ allFlights);
+		
 		/*Airplanes airplanes = ServerInterface.INSTANCE.getAirplanes(teamName);
 		Collections.sort(airplanes);
 		for (Airplane airplane : airplanes) {
