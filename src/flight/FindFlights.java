@@ -20,7 +20,6 @@ public class FindFlights{
 	public ArrayList<ValidFlights> getFlights(String departAirportCode, String arriveAirportCode, String departureDate) {
 		departureAirport = departAirportCode;
 		finalDestinationAirport = arriveAirportCode;
-		ConnectingFlights aggregate = new ConnectingFlights();
 		for (int leg = 0; leg < 3; leg++) {
 			Flights departingFlights = null;
 			

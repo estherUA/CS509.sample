@@ -302,7 +302,6 @@ public enum ServerInterface {
 	/*
 	 */ 
 	 	public Flights getFlights (String teamName, String departureAirportCode, String date, String destinationAirportCode) {
-
 		URL url;
 		HttpURLConnection connection;
 		BufferedReader reader;
@@ -352,47 +351,7 @@ public enum ServerInterface {
 		departingFlights = DaoFlight.addAll(xmlDepartingFlights);
 		
 		
-		// Get Flights arriving at a particular Airport
-		try {
-			/**
-			 * Create an HTTP connection to the server for a GET 
-			 */
-			url = new URL(mUrlBase + QueryFactory.getArrivingFlights(teamName, destinationAirportCode, date));
-			connection = (HttpURLConnection) url.openConnection();
-			connection.setRequestMethod("GET");
-			connection.setRequestProperty("User-Agent", teamName);
-
-			/**
-			 * If response code of SUCCESS read the XML string returned
-			 * line by line to build the full return string
-			 */
-			int responseCode = connection.getResponseCode();
-			if (responseCode >= HttpURLConnection.HTTP_OK) {
-				InputStream inputStream = connection.getInputStream();
-				String encoding = connection.getContentEncoding();
-				encoding = (encoding == null ? "UTF-8" : encoding);
-
-				reader = new BufferedReader(new InputStreamReader(inputStream));
-				while ((line = reader.readLine()) != null) {
-					arrivingResults.append(line);
-				}
-				reader.close();
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		Airports allDepartingAirports = getAirports(teamName);
-		HashMap<String, Airport> airportDepartureMap = DaoAirport.getAirportsMap(allDepartingAirports);
-		xmlArrivingFlights = arrivingResults.toString();
-		arrivingFlights = DaoFlight.addAll(xmlArrivingFlights);
-		
-		Flights finalFlights = new Flights();
-		
-		//Some magic happens here
-		
-		return finalFlights;
+		return departingFlights;
 		
 	}
 	 /* */

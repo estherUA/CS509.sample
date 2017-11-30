@@ -4,6 +4,7 @@
 package driver;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.Collections;
 
 import airplane.Airplane;
@@ -98,13 +99,14 @@ public class Driver {
 //		System.out.println(flightnumber);
 
 
-		Flights flights = ServerInterface.INSTANCE.getFlights(teamName, departureCode, departuredate, arrivalCode);
-		for (Flight flight : flights) {
-			flight = localtime.updateLocalTime(teamName, flight);
-			System.out.println(flight.toString());}
+//		Flights flights = ServerInterface.INSTANCE.getFlights(teamName, departureCode, departuredate, arrivalCode);
+//		for (Flight flight : flights) {
+//			flight = localtime.updateLocalTime(teamName, flight);
+//			System.out.println(flight.toString());}
 
-
-	}
+		FindFlights allFlights = new FindFlights();
+		ArrayList<ValidFlights> directAndConnecting = allFlights.getFlights(departureCode, arrivalCode, departuredate);
+		System.out.println(directAndConnecting.toString());}
 
 
 }
