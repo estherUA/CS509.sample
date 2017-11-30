@@ -16,7 +16,6 @@ import airport.Airport;
 import airport.Airports;
 import flight.Flight;
 import flight.Flights;
-import flight.connectingFlights;
 import airplane.Airplanes;
 import utils.QueryFactory;
 
@@ -303,7 +302,6 @@ public enum ServerInterface {
 	/*
 	 */ 
 	 	public Flights getFlights (String teamName, String departureAirportCode, String date, String destinationAirportCode) {
-
 		URL url;
 		HttpURLConnection connection;
 		BufferedReader reader;
@@ -353,49 +351,7 @@ public enum ServerInterface {
 		departingFlights = DaoFlight.addAll(xmlDepartingFlights);
 		
 		
-		// Get Flights arriving at a particular Airport
-		try {
-			/**
-			 * Create an HTTP connection to the server for a GET 
-			 */
-			url = new URL(mUrlBase + QueryFactory.getArrivingFlights(teamName, destinationAirportCode, date));
-			connection = (HttpURLConnection) url.openConnection();
-			connection.setRequestMethod("GET");
-			connection.setRequestProperty("User-Agent", teamName);
-
-			/**
-			 * If response code of SUCCESS read the XML string returned
-			 * line by line to build the full return string
-			 */
-			int responseCode = connection.getResponseCode();
-			if (responseCode >= HttpURLConnection.HTTP_OK) {
-				InputStream inputStream = connection.getInputStream();
-				String encoding = connection.getContentEncoding();
-				encoding = (encoding == null ? "UTF-8" : encoding);
-
-				reader = new BufferedReader(new InputStreamReader(inputStream));
-				while ((line = reader.readLine()) != null) {
-					arrivingResults.append(line);
-				}
-				reader.close();
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		Airports allDepartingAirports = getAirports(teamName);
-		HashMap<String, Airport> airportDepartureMap = DaoAirport.getAirportsMap(allDepartingAirports);
-		xmlArrivingFlights = arrivingResults.toString();
-		arrivingFlights = DaoFlight.addAll(xmlArrivingFlights);
-		
-		connectingFlights calculateConnectingFlights = new connectingFlights();
-		Flights finalFlights = new Flights();
-		finalFlights = calculateConnectingFlights.getConnectingFlights(departureAirportCode, destinationAirportCode, departingFlights, arrivingFlights, teamName, date);
-		
-		//Some magic happens here
-		
-		return finalFlights;
+		return departingFlights;
 		
 	}
 	 /* */

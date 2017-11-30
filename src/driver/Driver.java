@@ -4,16 +4,20 @@
 package driver;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.Collections;
 
 import airplane.Airplane;
 import airport.Airport;
 import airport.Airports;
 import dao.DaoAirport;
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import dao.ServerInterface;
+import flight.ConnectingFlight;
+import flight.ConnectingFlights;
+import flight.FindFlights;
 import flight.Flight;
 import flight.Flights;
+import flight.ValidFlights;
 import java.util.HashMap;
 import airplane.Airplanes;
 import flight.LocalTimeConverter;
@@ -69,9 +73,6 @@ public class Driver {
 			System.out.println(airport.toString());
 		}*/
 
-
-
-
 		LocalTimeConverter localtime = new LocalTimeConverter();
 //		Flights departflights = ServerInterface.INSTANCE.getDepartingFlights(teamName, departureCode, departuredate);
 //		//departflights = localtime.updateLocalTime(depart)
@@ -98,19 +99,14 @@ public class Driver {
 //		System.out.println(flightnumber);
 
 
-		Flights flights = ServerInterface.INSTANCE.getFlights(teamName, departureCode, departuredate, arrivalCode);
-		for (Flight flight : flights) {
-			flight = localtime.updateLocalTime(teamName, flight);
-			System.out.println(flight.toString());}
+//		Flights flights = ServerInterface.INSTANCE.getFlights(teamName, departureCode, departuredate, arrivalCode);
+//		for (Flight flight : flights) {
+//			flight = localtime.updateLocalTime(teamName, flight);
+//			System.out.println(flight.toString());}
 
-		/*Airplanes airplanes = ServerInterface.INSTANCE.getAirplanes(teamName);
-		Collections.sort(airplanes);
-		for (Airplane airplane : airplanes) {
-			System.out.println(airplane.toString());
-		}*/
-
-
-	}
+		FindFlights allFlights = new FindFlights();
+		ArrayList<ValidFlights> directAndConnecting = allFlights.getFlights(departureCode, arrivalCode, departuredate);
+		System.out.println(directAndConnecting.toString());}
 
 
 }
