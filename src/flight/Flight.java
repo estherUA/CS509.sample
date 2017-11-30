@@ -2,6 +2,10 @@ package flight;
 
 import java.util.Comparator;
 
+import airport.Airport;
+import airport.Airports;
+
+import flight.LocalTimeConverter;
 import utils.Saps;
 
 public class Flight implements Comparable<Flight>, Comparator<Flight>{

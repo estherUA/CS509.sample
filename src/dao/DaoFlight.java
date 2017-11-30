@@ -48,7 +48,7 @@ public class DaoFlight {
 	 * @pre the xmlAirports string adheres to the format specified by the server API
 	 * @post the [possibly empty] set of Airports in the XML string are added to collection
 	 */
-	public static Flights addAll (String xmlFlights, HashMap<String, Airport> airportMap) throws NullPointerException {
+	public static Flights addAll (String xmlFlights) throws NullPointerException {
 		Flights flights = new Flights();
 		
 		// Load the XML string into a DOM tree for ease of processing
@@ -58,7 +58,7 @@ public class DaoFlight {
 		
 		for (int i = 0; i < nodesFlights.getLength(); i++) {
 			Element elementFlight = (Element) nodesFlights.item(i);
-			Flight flight = buildFlight (elementFlight, airportMap);
+			Flight flight = buildFlight (elementFlight);
 			
 			if (flight.isValid()) {
 				flights.add(flight);
@@ -77,7 +77,7 @@ public class DaoFlight {
 	 * 
 	 * @pre nodeAirport is of format specified by CS509 server API
 	 */
-	static private Flight buildFlight (Node nodeFlight, HashMap<String, Airport> airportMap) {
+	static private Flight buildFlight (Node nodeFlight) {
 		/**
 		 * Instantiate an empty Airport object
 		 */
@@ -156,36 +156,36 @@ public class DaoFlight {
 		
 		//Calculate Local Time
 		//Departure Airport
-		Airport departureAirport = airportMap.get(flDepartureCode);
-		String dlon = Double.toString(departureAirport.longitude());
-		String dlat = Double.toString(departureAirport.latitude());
-		Date departureTime = new Date(flDepartureTime);
-		long departureTimeMil = departureTime.getTime();
-		long dts = departureTimeMil/1000;
-		
-		LocalTimeConverter dltc = new LocalTimeConverter();
-		String departTimeZone = dltc.convertLocalTime(dlon, dlat, Long.toString(dts));
-		
-		if(departTimeZone != "") {
-			formatter.setTimeZone(TimeZone.getTimeZone(departTimeZone));
-			flDepartAirportLocalTime = formatter.format(departureTimeMil);
-		}
-		
-		//Arrival Airport
-		Airport arrivalAirport = airportMap.get(flArrivalCode);
-		String alon = Double.toString(arrivalAirport.longitude());
-		String alat = Double.toString(arrivalAirport.latitude());
-		Date arrivalTime = new Date(flArrivalTime);
-		long arrivalTimeMil = arrivalTime.getTime();
-		long ats = arrivalTimeMil/1000;
-		
-		LocalTimeConverter altc = new LocalTimeConverter();
-		String arrivalTimeZone = altc.convertLocalTime(alon, alat, Long.toString(ats));
-		
-		if(arrivalTimeZone != "") {
-			formatter.setTimeZone(TimeZone.getTimeZone(arrivalTimeZone));
-			flArrivalAirportLocalTime = formatter.format(arrivalTimeMil);
-		}
+//		Airport departureAirport = airportMap.get(flDepartureCode);
+//		String dlon = Double.toString(departureAirport.longitude());
+//		String dlat = Double.toString(departureAirport.latitude());
+//		Date departureTime = new Date(flDepartureTime);
+//		long departureTimeMil = departureTime.getTime();
+//		long dts = departureTimeMil/1000;
+//
+//		LocalTimeConverter dltc = new LocalTimeConverter();
+//		String departTimeZone = dltc.convertLocalTime(dlon, dlat, Long.toString(dts));
+//
+//		if(departTimeZone != "") {
+//			formatter.setTimeZone(TimeZone.getTimeZone(departTimeZone));
+//			flDepartAirportLocalTime = formatter.format(departureTimeMil);
+//		}
+//
+//		//Arrival Airport
+//		Airport arrivalAirport = airportMap.get(flArrivalCode);
+//		String alon = Double.toString(arrivalAirport.longitude());
+//		String alat = Double.toString(arrivalAirport.latitude());
+//		Date arrivalTime = new Date(flArrivalTime);
+//		long arrivalTimeMil = arrivalTime.getTime();
+//		long ats = arrivalTimeMil/1000;
+//
+//		LocalTimeConverter altc = new LocalTimeConverter();
+//		String arrivalTimeZone = altc.convertLocalTime(alon, alat, Long.toString(ats));
+//
+//		if(arrivalTimeZone != "") {
+//			formatter.setTimeZone(TimeZone.getTimeZone(arrivalTimeZone));
+//			flArrivalAirportLocalTime = formatter.format(arrivalTimeMil);
+//		}
 		
 		/**
 		 * Update the Airport object with values from XML node

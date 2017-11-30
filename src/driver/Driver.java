@@ -9,11 +9,14 @@ import java.util.Collections;
 import airplane.Airplane;
 import airport.Airport;
 import airport.Airports;
+import dao.DaoAirport;
 import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import dao.ServerInterface;
 import flight.Flight;
 import flight.Flights;
+import java.util.HashMap;
 import airplane.Airplanes;
+import flight.LocalTimeConverter;
 
 /**
  * @author blake
@@ -48,8 +51,11 @@ public class Driver {
 		String departureCode = args[1];
 		//String departuredate = ui.getDeparturedate();
 		String departuredate = args[2];
+		//String arrivalCode = args[3];
 		String arrivalCode = args[3];
-
+		Airports allAirports = ServerInterface.INSTANCE.getAirports(teamName);
+//		LocalTimeConverter localtime = new LocalTimeConverter();
+//		localtime.getTimeZone(allAirports, Integer.toString(1331766000) );
 
 		//from and to airport
 		//String departureCode = args[1];
@@ -63,9 +69,14 @@ public class Driver {
 			System.out.println(airport.toString());
 		}*/
 
-//
+
+
+
+		LocalTimeConverter localtime = new LocalTimeConverter();
 //		Flights departflights = ServerInterface.INSTANCE.getDepartingFlights(teamName, departureCode, departuredate);
+//		//departflights = localtime.updateLocalTime(depart)
 //		for (Flight departflight : departflights) {
+//			departflight = localtime.updateLocalTime(teamName, departflight);
 //			System.out.println(departflight.toString());
 //		}
 
@@ -89,6 +100,7 @@ public class Driver {
 
 		Flights flights = ServerInterface.INSTANCE.getFlights(teamName, departureCode, departuredate, arrivalCode);
 		for (Flight flight : flights) {
+			flight = localtime.updateLocalTime(teamName, flight);
 			System.out.println(flight.toString());}
 
 		/*Airplanes airplanes = ServerInterface.INSTANCE.getAirplanes(teamName);

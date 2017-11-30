@@ -235,11 +235,11 @@ public enum ServerInterface {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		Airports allAirports = getAirports(teamName);
-		//HashMap airportMap = getAirportsMap(allAirports);
-		HashMap<String, Airport> airportMap = DaoAirport.getAirportsMap(allAirports);
+//		Airports allAirports = getAirports(teamName);
+//		HashMap<String, Airport> airportMap = DaoAirport.getAirportsMap(allAirports);
+
 		xmlFlights = result.toString();
-		flights = DaoFlight.addAll(xmlFlights, airportMap);
+		flights = DaoFlight.addAll(xmlFlights);
 		return flights;
 		
 	}
@@ -294,7 +294,7 @@ public enum ServerInterface {
 		Airports allAirports = getAirports(teamName);
 		HashMap<String, Airport> airportMap = DaoAirport.getAirportsMap(allAirports);
 		xmlFlights = result.toString();
-		flights = DaoFlight.addAll(xmlFlights, airportMap);
+		flights = DaoFlight.addAll(xmlFlights);
 		return flights;
 
 	}
@@ -350,7 +350,7 @@ public enum ServerInterface {
 		Airports allAirports = getAirports(teamName);
 		HashMap<String, Airport> airportMap = DaoAirport.getAirportsMap(allAirports);
 		xmlDepartingFlights = departingResults.toString();
-		departingFlights = DaoFlight.addAll(xmlDepartingFlights, airportMap);
+		departingFlights = DaoFlight.addAll(xmlDepartingFlights);
 		
 		
 		// Get Flights arriving at a particular Airport
@@ -387,7 +387,7 @@ public enum ServerInterface {
 		Airports allDepartingAirports = getAirports(teamName);
 		HashMap<String, Airport> airportDepartureMap = DaoAirport.getAirportsMap(allDepartingAirports);
 		xmlArrivingFlights = arrivingResults.toString();
-		arrivingFlights = DaoFlight.addAll(xmlArrivingFlights, airportDepartureMap);
+		arrivingFlights = DaoFlight.addAll(xmlArrivingFlights);
 		
 		connectingFlights calculateConnectingFlights = new connectingFlights();
 		Flights finalFlights = new Flights();
