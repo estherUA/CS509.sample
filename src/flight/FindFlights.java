@@ -3,14 +3,17 @@ package flight;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import com.google.gson.Gson;
+
 import dao.ServerInterface;
 
 public class FindFlights{
 	DepartureCache cache = new DepartureCache();
 	PotentialFlights potentialFlights = new PotentialFlights();
-	PotentialFlights secondPotentialFlights = new PotentialFlights();
 	ValidFlights validFlights = new ValidFlights();
 	ArrayList<ValidFlights> potentialValidFlights = new ArrayList<ValidFlights>();
+	ArrayList<ValidStringFlights> validStringFlightCollection = new ArrayList<ValidStringFlights>();
+	ValidStringFlights stringPotentialFlights = new ValidStringFlights();
 	ArrayList<ValidFlights> validFlightCollection = new ArrayList<ValidFlights>();
 	String departureAirport = ""; 	// initialize with the departure airport code
 	String finalDestinationAirport = ""; 	// initialize with the arrival airport code
@@ -18,6 +21,7 @@ public class FindFlights{
 	String teamName = "SmartDesign";
 	
 	public ArrayList<ValidFlights> getFlights(String departAirportCode, String arriveAirportCode, String departureDate) {
+	//public ArrayList<ValidStringFlights> getFlights(String departAirportCode, String arriveAirportCode, String departureDate) {
 		departureAirport = departAirportCode;
 		finalDestinationAirport = arriveAirportCode;
 		for (int leg = 0; leg < 3; leg++) {
@@ -32,7 +36,11 @@ public class FindFlights{
 					if (flight.arrivalFlightCode().equalsIgnoreCase(finalDestinationAirport)) {
 						//validFlights.add(flight);
 						ValidFlights directFlights = new ValidFlights();
+						//ArrayList<String> directFlights = new ArrayList<String>();
+						//String jsonFlight = gson.toJson(flight);
+						
 						directFlights.add(flight);
+						//directFlights.add(jsonFlight);
 						validFlightCollection.add(directFlights);
 					} else {
 						potentialFlights.add(flight);
@@ -54,9 +62,16 @@ public class FindFlights{
 						possibleConnections.add(connection);
 						if (flight.arrivalFlightCode().equalsIgnoreCase(finalDestinationAirport)) {
 							if (possibleConnections.validConnection(flight)) { //connections different from connections
-								//validFlights.add(connection);
+								/*
+								String jsonConnection = gson.toJson(connection);
+								String jsonPossibleFlight = gson.toJson(flight);
+								stringPotentialFlights.add(jsonConnection);
+								stringPotentialFlights.add(jsonPossibleFlight);*/
+								//System.out.println(jsonFlight);
+								
 								possibleConnections.add(flight);
 								validFlightCollection.add(possibleConnections);
+								validStringFlightCollection.add(stringPotentialFlights);
 							} 
 						} /*else {
 							ValidFlights validFlightConnections = new ValidFlights();// they are valid but they haven't gotten to the final destination just yet.

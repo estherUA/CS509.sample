@@ -153,40 +153,6 @@ public class DaoFlight {
 		
 		//flArrivalTime = String.valueOf(getCharacterDataFromElement(elementArrivalTime));
 		
-		
-		//Calculate Local Time
-		//Departure Airport
-//		Airport departureAirport = airportMap.get(flDepartureCode);
-//		String dlon = Double.toString(departureAirport.longitude());
-//		String dlat = Double.toString(departureAirport.latitude());
-//		Date departureTime = new Date(flDepartureTime);
-//		long departureTimeMil = departureTime.getTime();
-//		long dts = departureTimeMil/1000;
-//
-//		LocalTimeConverter dltc = new LocalTimeConverter();
-//		String departTimeZone = dltc.convertLocalTime(dlon, dlat, Long.toString(dts));
-//
-//		if(departTimeZone != "") {
-//			formatter.setTimeZone(TimeZone.getTimeZone(departTimeZone));
-//			flDepartAirportLocalTime = formatter.format(departureTimeMil);
-//		}
-//
-//		//Arrival Airport
-//		Airport arrivalAirport = airportMap.get(flArrivalCode);
-//		String alon = Double.toString(arrivalAirport.longitude());
-//		String alat = Double.toString(arrivalAirport.latitude());
-//		Date arrivalTime = new Date(flArrivalTime);
-//		long arrivalTimeMil = arrivalTime.getTime();
-//		long ats = arrivalTimeMil/1000;
-//
-//		LocalTimeConverter altc = new LocalTimeConverter();
-//		String arrivalTimeZone = altc.convertLocalTime(alon, alat, Long.toString(ats));
-//
-//		if(arrivalTimeZone != "") {
-//			formatter.setTimeZone(TimeZone.getTimeZone(arrivalTimeZone));
-//			flArrivalAirportLocalTime = formatter.format(arrivalTimeMil);
-//		}
-		
 		/**
 		 * Update the Airport object with values from XML node
 		 */

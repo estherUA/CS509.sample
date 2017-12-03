@@ -18,6 +18,8 @@ import flight.FindFlights;
 import flight.Flight;
 import flight.Flights;
 import flight.ValidFlights;
+import flight.ValidStringFlights;
+
 import java.util.HashMap;
 import airplane.Airplanes;
 import flight.LocalTimeConverter;
@@ -50,21 +52,10 @@ public class Driver {
 
 
 		UserInput ui = new UserInput();
-		//userInput
-		//String departureCode= ui.getDepartureCode();
 		String departureCode = args[1];
-		//String departuredate = ui.getDeparturedate();
 		String departuredate = args[2];
-		//String arrivalCode = args[3];
 		String arrivalCode = args[3];
 		Airports allAirports = ServerInterface.INSTANCE.getAirports(teamName);
-//		LocalTimeConverter localtime = new LocalTimeConverter();
-//		localtime.getTimeZone(allAirports, Integer.toString(1331766000) );
-
-		//from and to airport
-		//String departureCode = args[1];
-		//String date = args[2];
-		//String arrivalCode = args[3];
 
 		//Try to get a list of airports
 		/*Airports airports = ServerInterface.INSTANCE.getAirports(teamName);
@@ -74,35 +65,6 @@ public class Driver {
 		}*/
 
 		LocalTimeConverter localtime = new LocalTimeConverter();
-//		Flights departflights = ServerInterface.INSTANCE.getDepartingFlights(teamName, departureCode, departuredate);
-//		//departflights = localtime.updateLocalTime(depart)
-//		for (Flight departflight : departflights) {
-//			departflight = localtime.updateLocalTime(teamName, departflight);
-//			System.out.println(departflight.toString());
-//		}
-
-
-
-		//Flights arrivalflights = ServerInterface.INSTANCE.getArrivingFlights(teamName, code, date);
-		//for (Flight arrivalflight : arrivalflights) {
-		//System.out.println(arrivalflight.toString());}
-
-		//Airplanes airplanes = ServerInterface.INSTANCE.getAirplanes(teamName);
-		//Collections.sort(airplanes);
-		//for (Airplane airplane : airplanes) {
-		//System.out.println(airplane.toString());
-
-//
-//		String flightnumber = ui.getFlightNumber();
-//
-//		System.out.println("Desired flight number: \r");
-//		System.out.println(flightnumber);
-
-
-//		Flights flights = ServerInterface.INSTANCE.getFlights(teamName, departureCode, departuredate, arrivalCode);
-//		for (Flight flight : flights) {
-//			flight = localtime.updateLocalTime(teamName, flight);
-//			System.out.println(flight.toString());}
 
 		FindFlights allFlights = new FindFlights();
 		ArrayList<ValidFlights> directAndConnecting = allFlights.getFlights(departureCode, arrivalCode, departuredate);

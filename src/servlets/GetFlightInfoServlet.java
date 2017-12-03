@@ -49,14 +49,12 @@ public class GetFlightInfoServlet extends HttpServlet {
 		
 		FindFlights findFlights = new FindFlights();
 		String flightsAndConnections = (findFlights.getFlights(departCode, arrivalCode, departDate)).toString();
-		
+		System.out.println(flightsAndConnections);
 		
 		//String depart = "Test " + departCode + " " + arrivalCode + " " + departDate + " " + userName;
-		//response.setContentType("text/plain");
-		//response.getWriter().write(departingFlights);
+		response.setContentType("text/plain");
 		
 		//String json = new Gson().toJson(departingFlights);
-		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(flightsAndConnections);
 	}

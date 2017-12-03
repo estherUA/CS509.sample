@@ -2,11 +2,14 @@ package flight;
 
 import java.util.ArrayList;
 
-public class ValidFlights extends ConnectingFlights {
+//public class ValidFlights extends ConnectingFlights {
+public class ValidStringFlights extends ArrayList<String> {
 	private static final long serialVersionUID = 1L;	
-	ValidFlights () {
+	ValidStringFlights () {
 		super();
 	}
+	
+	
 }
 /* This class will store connecting flights known to arrive at final destination. 
 When a PotentialFlight is determined to arrive at final destination it is moved from the

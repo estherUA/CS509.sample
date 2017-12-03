@@ -2,6 +2,8 @@ package flight;
 
 import java.util.Comparator;
 
+import com.google.gson.Gson;
+
 import airport.Airport;
 import airport.Airports;
 
@@ -183,22 +185,42 @@ public class Flight implements Comparable<Flight>, Comparator<Flight>{
 	 */
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
-		
-		//sb.append(mflightNumber).append(", ");
-		//sb.append(String.valueOf(mflightDuration)).append(", ");
-		sb.append("Departure: ").append(mDepartFlightCode).append(", ");
-		//sb.append("Departure Date Time: ").append(mDepartFlightDateTime).append(", ");
-		sb.append("Arrival: ").append(mArrivalFlightCode).append(", ");
-		//sb.append("FCSeating: ").append(mFirstClassSeating).append(", ");
-		//sb.append("FCPrice: ").append("$").append(mFirstClassPrice).append(", ");
-		//sb.append("CSeating: ").append(mCoachSeating).append(", ");
-		//sb.append("CPrice: ").append("$").append(mCoachPrice).append(", ");
-		sb.append("Departure GMT: ").append(mDepartFlightDateTime).append(", ");
-		sb.append("Depart LocalTime: ").append(mDepartLocalTime).append(", ");
-		sb.append("Arrival GMT: ").append(mArrivalFlightDateTime).append(", ");
-		sb.append("Arrival LocalTime: ").append(mArrivalLocalTime).append("\n");
 
+		/*sb.append("{");
+		sb.append("FlightNumber: ").append(mflightNumber).append(", ");
+		sb.append("FlightDuration: ").append(String.valueOf(mflightDuration)).append(", ");
+		sb.append("Departure: ").append(mDepartFlightCode).append(", ");
+		sb.append("Arrival: ").append(mArrivalFlightCode).append(", ");
+		sb.append("FCSeating: ").append(mFirstClassSeating).append(", ");
+		sb.append("FCPrice: ").append("$").append(mFirstClassPrice).append(", ");
+		sb.append("CSeating: ").append(mCoachSeating).append(", ");
+		sb.append("CPrice: ").append("$").append(mCoachPrice).append(", ");
+		sb.append("DepartureGMT: ").append(mDepartFlightDateTime).append(", ");
+		sb.append("DepartLocalTime: ").append(mDepartLocalTime).append(", ");
+		sb.append("ArrivalGMT: ").append(mArrivalFlightDateTime).append(", ");
+		sb.append("ArrivalLocalTime: ").append(mArrivalLocalTime).append("}");//.append("\n");*/
+		
+		sb.append("{");
+		sb.append("'FlightNumber': '").append(mflightNumber).append("', ");
+		sb.append("'FlightDuration': '").append(String.valueOf(mflightDuration)).append("', ");
+		sb.append("'Departure': '").append(mDepartFlightCode).append("', ");
+		sb.append("'Arrival': '").append(mArrivalFlightCode).append("', ");
+		sb.append("'FCSeating': '").append(mFirstClassSeating).append("', ");
+		sb.append("'FCPrice': '").append("$").append(mFirstClassPrice).append("', ");
+		sb.append("'CSeating': '").append(mCoachSeating).append("', ");
+		sb.append("'CPrice': '").append("$").append(mCoachPrice).append("', ");
+		sb.append("'DepartureGMT': '").append(mDepartFlightDateTime).append("', ");
+		sb.append("'ArrivalGMT': '").append(mArrivalFlightDateTime).append("'}");
+		
 		return sb.toString();
+	}
+	
+	//String jsonEmployee = JsonUtil
+	
+	public String toJson() {
+		Gson gson = new Gson();
+		String jsonInString = gson.toJson(this);
+		return jsonInString;
 	}
 
 	/**
