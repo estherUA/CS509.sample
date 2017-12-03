@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import airport.Airport;
@@ -17,7 +18,9 @@ import airport.Airports;
 import flight.Flight;
 import flight.Flights;
 import airplane.Airplanes;
+import reservation.ReserveFlight;
 import utils.QueryFactory;
+import java.lang.Exception;
 
 
 /**
@@ -33,7 +36,15 @@ public enum ServerInterface {
 	INSTANCE;
 	
 	private final String mUrlBase = "http://cs509.cs.wpi.edu:8181/CS509.server/ReservationSystem";
-
+	ArrayList<String> mylist = new ArrayList<String>();
+	public ArrayList<String> flightnumber(){
+		mylist.add("5063");
+		return mylist;
+	}
+	public ArrayList<String> seating(){
+		mylist.add("firstClass");
+		return mylist;
+	}
 	/**
 	 * Return a collection of all the airports from server
 	 * 
@@ -239,6 +250,7 @@ public enum ServerInterface {
 
 		xmlFlights = result.toString();
 		flights = DaoFlight.addAll(xmlFlights);
+
 		return flights;
 		
 	}
@@ -291,7 +303,7 @@ public enum ServerInterface {
 
 		//?
 		Airports allAirports = getAirports(teamName);
-		HashMap<String, Airport> airportMap = DaoAirport.getAirportsMap(allAirports);
+		//HashMap<String, Airport> airportMap = DaoAirport.getAirportsMap(allAirports);
 		xmlFlights = result.toString();
 		flights = DaoFlight.addAll(xmlFlights);
 		return flights;
@@ -300,7 +312,8 @@ public enum ServerInterface {
 
 	
 	/*
-	 */ 
+	 */
+	//why no use of destinationAirportcode?
 	 	public Flights getFlights (String teamName, String departureAirportCode, String date, String destinationAirportCode) {
 		URL url;
 		HttpURLConnection connection;
@@ -346,7 +359,7 @@ public enum ServerInterface {
 		}
 		
 		Airports allAirports = getAirports(teamName);
-		HashMap<String, Airport> airportMap = DaoAirport.getAirportsMap(allAirports);
+		//HashMap<String, Airport> airportMap = DaoAirport.getAirportsMap(allAirports);
 		xmlDepartingFlights = departingResults.toString();
 		departingFlights = DaoFlight.addAll(xmlDepartingFlights);
 		
@@ -400,6 +413,60 @@ public enum ServerInterface {
 		xmlAirplanes = result.toString();
 		airplanes = DaoAirplane.addAll(xmlAirplanes);
 		return airplanes;
+	}
+
+	public void reserveFlight (String teamName, String xmlFlights) {
+
+		URL url;
+		HttpURLConnection connection;
+		BufferedReader reader;
+		String line;
+		//StringBuffer result = new StringBuffer();
+
+		//String xmlAirplanes;
+		//Airplanes airplanes;
+
+		try {
+			/**
+			 * Create an HTTP connection to the server for a POST
+			 */
+			url = new URL(mUrlBase);
+			connection = (HttpURLConnection) url.openConnection();
+			connection.setRequestMethod("POST");
+			connection.setRequestProperty("User-Agent", teamName);
+			connection.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+
+			String params = QueryFactory.reserveSeats(teamName, xmlFlights);
+
+			connection.setDoOutput(true);
+			DataOutputStream writer = new DataOutputStream(connection.getOutputStream());
+			writer.writeBytes(params);
+			writer.flush();
+			writer.close();
+
+			int responseCode = connection.getResponseCode();
+			System.out.println("\nSending 'POST' to reserveseats");
+			System.out.println(("\nResponse Code : " + responseCode));
+
+			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			String result;
+			StringBuffer response = new StringBuffer();
+
+			while ((result = in.readLine()) != null) {
+				response.append(result);
+			}
+			in.close();
+
+			System.out.println(response.toString());
+
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+
 	}
 
 }

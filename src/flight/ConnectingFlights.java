@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -13,6 +14,7 @@ import java.util.TimeZone;
 
 import flight.Flight;
 import flight.Flights;
+import airplane.Airplane;
 
 
 //public class ConnectingFlights extends ArrayList<ConnectingFlight> {
@@ -27,7 +29,7 @@ public class ConnectingFlights extends ArrayList<Flight> {
 	
 	//ArrayList <Flight>connectedFlights = new ArrayList<Flight>();
 	SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss Z");
-	
+	//?
 	ConnectingFlights() {
 		super(3);	// at most we can have 3 legs on a connecting flight
 	}
@@ -45,7 +47,7 @@ public class ConnectingFlights extends ArrayList<Flight> {
 		} else {
 			Flight previousStop = this.get(this.size()-1);
 			String d1, d2;
-			 Date date1, date2;
+			Date date1, date2;
 			
 			Date previousFlightDateTime = new Date(previousStop.arrivalFlightDateTime());
 			long previousFlightTimeMil = previousFlightDateTime.getTime();
@@ -74,7 +76,27 @@ public class ConnectingFlights extends ArrayList<Flight> {
 		}
 		return false;
 	}
-	
+
+	public boolean validSeating(Flight flight, Airplane airplane, int customerChoice) {
+		int coachcapacity = airplane.coach();
+		int firstclasscapacity = airplane.firstclass();
+		int reservedcoach = flight.coachSeating();
+		int reservedfirstclass = flight.firstClassSeating();
+		if (customerChoice == 0) {
+			if (coachcapacity - reservedcoach <= 0){
+				return false;
+			} else
+				return true;
+		} else if (firstclasscapacity - reservedfirstclass <=0){
+				return false;
+			} else
+				return true;
+
+
+
+	}
+
+
 	/* add a connection to the connections with error processing
 		the method will throw if the flight is not a validConnection
 	*/

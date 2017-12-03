@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import dao.ServerInterface;
+import reservation.ReserveFlight;
 
 public class FindFlights{
 	DepartureCache cache = new DepartureCache();
@@ -16,6 +17,8 @@ public class FindFlights{
 	String finalDestinationAirport = ""; 	// initialize with the arrival airport code
 	String currentAirport = "";
 	String teamName = "SmartDesign";
+
+
 	
 	public ArrayList<ValidFlights> getFlights(String departAirportCode, String arriveAirportCode, String departureDate) {
 		departureAirport = departAirportCode;
@@ -100,7 +103,7 @@ public class FindFlights{
 		return validFlightCollection;
 	}
 	
-	public Flights getDepartingFlightsFromServer (String airport, String date) {
+	public Flights getDepartingFlightsFromServer (String airport, String date){
 		Flights flights = ServerInterface.INSTANCE.getDepartingFlights(teamName, airport, date);
 		return flights;
 	}

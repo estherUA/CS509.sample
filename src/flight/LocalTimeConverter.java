@@ -120,20 +120,12 @@ public class LocalTimeConverter {
 
 
 
-	public Flight updateLocalTime(String teamName, Flight flight) {
-//		Airports allAirports = ServerInterface.INSTANCE.getAirports(teamName);
-//		DateFormat formatter= new SimpleDateFormat("MM/dd/yyyy HH:mm:ss Z");
-//		HashMap<String, Airport> airportMap = DaoAirport.getAirportsMap(allAirports);
+	public String updateLocalTime(String airportcode, String flightdatetime) {
 
-		//departure airport
-		//from the departure airport code get the corresponding airport object from hashmap
-//		Airport departureAirport = airportMap.get(flight.departFlightCode());
-		//departure airport longtitude and latitude
-//		String dlon = Double.toString(departureAirport.longitude());
-//		String dlat = Double.toString(departureAirport.latitude());
-		//GMT departure time
+
+
 		DateFormat formatter= new SimpleDateFormat("MM/dd/yyyy HH:mm:ss Z");
-		Date departureTime = new Date(flight.departFlightDateTime());
+		Date departureTime = new Date(flightdatetime);
 
 		long departureTimeMil = departureTime.getTime();
 		long dts = departureTimeMil / 1000;
@@ -142,32 +134,18 @@ public class LocalTimeConverter {
 		map = LoadHashMap();
 
 		//departing timezone
-		String departTimeZone = map.get(flight.departFlightCode());
+		String departTimeZone = map.get(airportcode);
 
 		if (departTimeZone != "") {
 			formatter.setTimeZone(TimeZone.getTimeZone(departTimeZone));
-			//flDepartAirportLocalTime = formatter.format(departureTimeMil);
-			flight.departLocalTime(formatter.format(departureTimeMil));
+			return formatter.format(departureTimeMil);
+			//flight.departLocalTime(formatter.format(departureTimeMil));
+
+		} else {
+			return null;
 		}
 
-		//Arrival Airport
-//		//Airport arrivalAirport = airportMap.get(flight.arrivalFlightCode());
-//		String alon = Double.toString(arrivalAirport.longitude());
-//		String alat = Double.toString(arrivalAirport.latitude());
-		Date arrivalTime = new Date(flight.arrivalFlightDateTime());
-		long arrivalTimeMil = arrivalTime.getTime();
-		long ats = arrivalTimeMil / 1000;
 
-		//LocalTimeConverter altc = new LocalTimeConverter();
-		String arrivalTimeZone = map.get(flight.arrivalFlightCode());
-
-		if (arrivalTimeZone != "") {
-			formatter.setTimeZone(TimeZone.getTimeZone(arrivalTimeZone));
-			//flArrivalAirportLocalTime = formatter.format(arrivalTimeMil);
-			flight.arrivalLocalTime(formatter.format(arrivalTimeMil));
-		}
-
-		return flight;
 	}
 
 	public HashMap<String, String> LoadHashMap() {
