@@ -122,7 +122,3 @@ function getFlights() {
 		}
 	});
 }
-
-function reserveFlights() {
-	 console.log($('input[name="flightSelected"]:checked').val());
-}
