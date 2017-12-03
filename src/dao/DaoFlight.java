@@ -200,12 +200,16 @@ public class DaoFlight {
 		flight.coachSeating(flCoachSeating);
 		flight.firstClassSeating(flFirstClassSeating);
 
-		flight.departLocalTime(flDepartAirportLocalTime);
-		flight.arrivalLocalTime(flArrivalAirportLocalTime);
+		LocalTimeConverter localtime = new LocalTimeConverter();
+		String departlocaltime = localtime.updateLocalTime(flight.departFlightCode(), flight.departFlightDateTime());
+		flight.departLocalTime(departlocaltime);
+		String arrivallocaltime = localtime.updateLocalTime(flight.arrivalFlightCode(), flight.arrivalFlightDateTime());
+		flight.arrivalLocalTime(arrivallocaltime);
 
 		flight.coachPrice(coachPrice);
 		flight.firstClassPrice(firstClassPrice);
-		
+
+
 		return flight;
 	}
 

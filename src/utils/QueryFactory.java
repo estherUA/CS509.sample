@@ -64,4 +64,8 @@ public class QueryFactory {
 		return "?team=" + teamName + "&action=list&list_type=airplanes";
 	}
 
+	public static String reserveSeats (String teamName, String xmlFlights) {
+		return "team=" + teamName + "&action=buyTickets&flightData=" + xmlFlights;
+	}
+
 }
