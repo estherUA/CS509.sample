@@ -19,15 +19,18 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/Users/estheragbaji/Downloads/CS509.sample/src/jars/java-json.jar">
+	<classpathentry exported="true" kind="lib" path="/Users/estheragbaji/Downloads/CS509.sample/src/jars/java-json.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/estheragbaji/Downloads/CS509.sample/src/jars/servlet-api.jar">
+	<classpathentry exported="true" kind="lib" path="/Users/estheragbaji/Downloads/CS509.sample/src/jars/servlet-api.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="src/jars/gson-2.8.2.jar"/>
+	<classpathentry kind="lib" path="src/jars/java-json.jar"/>
+	<classpathentry kind="lib" path="src/jars/servlet-api.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
