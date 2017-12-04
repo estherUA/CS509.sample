@@ -2,14 +2,14 @@ function getFlights() {
 	console.log("Worked");
 	$("#loader").removeClass("hidden");
 	$("#flightsTableBody").html(""); 
+	//,seating: $('input[name="seating"]:checked').val()
 	$.ajax({
 		url : 'GetFlightInfoServlet',
 		data : {
 			//arrivalDate : $('#arrivalDate').val(),
 			departureCode : $('#departCode').val().toUpperCase(),
 			arrivalCode : $('#arrivalCode').val().toUpperCase(),
-			departDate:  $('#departDate').val().replace(/-/g, '_'),
-			seating: $('input[name="seating"]:checked').val()
+			departDate:  $('#departDate').val().replace(/-/g, '_')
 		},
 		success : function(responseText) {
 			var res = responseText.slice(1, -1);
@@ -26,8 +26,9 @@ function getFlights() {
 				if(temp == 1){
 					var replaceSingleQuote = str.replace(/'/g, '"');
 					var jsonData = JSON.parse(replaceSingleQuote);
+					var arrayOfFlight = [jsonData.FlightNumber];
 				flightString += "<tr>" +
-				"<td><input type='radio' name='flightSelected' value='" +jsonData.FlightNumber+ "'>"  +
+				"<td><input type='radio' name='flightSelected' value='" +arrayOfFlight+ "'>"  +
 				"</td><td>" +jsonData.Departure +
 				"</td><td>" +jsonData.Arrival +
 				"</td><td>" +jsonData.DepartureGMT +
@@ -52,6 +53,7 @@ function getFlights() {
 					var conCSeat = "";
 					var conFCPrice = "";  
 					var conCPrice = "";
+					var arrayOfFlights = [];
 					
 					var initialString ="";
 					
@@ -66,7 +68,7 @@ function getFlights() {
 						var connection = con.replace(/'/g, '"');
 						var jsonData = JSON.parse(connection);
 						
-						
+						arrayOfFlights.push(jsonData.FlightNumber);
 						 conDeparture += jsonData.Departure + "<hr>"; 
 						 conArrival += jsonData.Arrival + "<hr>";
 						 conDepTime += jsonData.DepartureGMT + "<hr>"; 
@@ -94,7 +96,7 @@ function getFlights() {
 					}
 					
 					flightString += "<tr>" +
-					"<td><input type='radio' name='flightSelected' value='" +conFlightNum+ "'>"  +
+					"<td><input type='radio' name='flightSelected' value='" +arrayOfFlights+ "'>"  +
 					"</td><td>" +conDeparture + 
 					"</td><td>" +conArrival +
 					"</td><td>" +conDepTime +

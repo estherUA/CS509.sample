@@ -24,10 +24,16 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/estheragbaji/Downloads/CS509.sample/src/jars/servlet-api.jar">
+	<classpathentry kind="lib" path="/Users/estheragbaji/Downloads/CS509.sample/src/jars/servlet-api.jar" sourcepath="src/jars/servlet-api.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/Users/estheragbaji/Downloads/CS509.sample/src/jars/gson-2.8.2.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v8.5"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

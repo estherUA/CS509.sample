@@ -136,7 +136,7 @@ public class LocalTimeConverter {
 		//departing timezone
 		String departTimeZone = map.get(airportcode);
 
-		if (departTimeZone != "") {
+		if (departTimeZone != "" && departTimeZone != null) {
 			formatter.setTimeZone(TimeZone.getTimeZone(departTimeZone));
 			return formatter.format(departureTimeMil);
 			//flight.departLocalTime(formatter.format(departureTimeMil));
@@ -151,7 +151,7 @@ public class LocalTimeConverter {
 	public HashMap<String, String> LoadHashMap() {
 		HashMap<String, String> map = new HashMap<>();
 		try {
-			FileInputStream fis = new FileInputStream("TimeZoneMap.ser");
+			FileInputStream fis = new FileInputStream("/Users/estheragbaji/Downloads/CS509.sample/TimeZoneMap.ser");
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			map = (HashMap) ois.readObject();
 			ois.close();

@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +14,7 @@ import dao.ServerInterface;
 import flight.FindFlights;
 import flight.Flight;
 import flight.Flights;
+import flight.ValidFlights;
 
 /**
  * Servlet implementation class GetFlightInfoServlet
@@ -37,7 +40,6 @@ public class GetFlightInfoServlet extends HttpServlet {
 		String departCode = request.getParameter("departureCode").trim();
 		String arrivalCode = request.getParameter("arrivalCode").trim();
 		String departDate = request.getParameter("departDate").trim();
-		String departFlight = "";
 		
 		if(userName == null || "".equals(userName)){
 			userName = "Guest";
@@ -47,16 +49,20 @@ public class GetFlightInfoServlet extends HttpServlet {
 		//String departingFlights = (ServerInterface.INSTANCE.getDepartingFlights(userName, departCode, departDate)).toString();
 		
 		
-		FindFlights findFlights = new FindFlights();
+		/*FindFlights findFlights = new FindFlights();
 		String flightsAndConnections = (findFlights.getFlights(departCode, arrivalCode, departDate)).toString();
-		System.out.println(flightsAndConnections);
+		System.out.println(flightsAndConnections);*/
+		
+		FindFlights allFlights = new FindFlights();
+		ArrayList<ValidFlights> directAndConnecting = allFlights.getFlights(departCode, arrivalCode, departDate);
+		System.out.println(directAndConnecting.toString());
 		
 		//String depart = "Test " + departCode + " " + arrivalCode + " " + departDate + " " + userName;
 		response.setContentType("text/plain");
 		
 		//String json = new Gson().toJson(departingFlights);
 		response.setCharacterEncoding("UTF-8");
-		response.getWriter().write(flightsAndConnections);
+		response.getWriter().write(directAndConnecting.toString());
 	}
 
 	/**
