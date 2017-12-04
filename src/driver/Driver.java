@@ -94,7 +94,7 @@ public class Driver {
 		seating.add("Coach");
 		seating.add("Coach");
 
-		ReserveFlight.makeReservation(teamName, flightnumber, seating);
+		//ReserveFlight.makeReservation(teamName, flightnumber, seating);
 		//String xmlflights = ReserveFlight.makeFlightXML(flightnumber, seating);
 		//ServerInterface.INSTANCE.reserveFlight(teamName, xmlflights);
 	}

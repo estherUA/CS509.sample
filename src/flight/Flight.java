@@ -188,6 +188,10 @@ public class Flight implements Comparable<Flight>, Comparator<Flight>{
 		StringBuffer sb = new StringBuffer();
 
 		/*
+
+		
+		sb.append(mflightNumber).append(", ");
+
 		sb.append("FCSeating: ").append(mFirstClassSeating).append(", ");
 		sb.append("FCPrice: ").append("$").append(mFirstClassPrice).append(", ");
 		sb.append("CSeating: ").append(mCoachSeating).append(", ");
@@ -207,8 +211,9 @@ public class Flight implements Comparable<Flight>, Comparator<Flight>{
 		sb.append("'CSeating': '").append(mCoachSeating).append("', ");
 		sb.append("'CPrice': '").append("$").append(mCoachPrice).append("', ");
 		sb.append("'DepartureGMT': '").append(mDepartFlightDateTime).append("', ");
-		sb.append("'ArrivalGMT': '").append(mArrivalFlightDateTime).append("'}");
+		sb.append("'ArrivalGMT': '").append(mArrivalFlightDateTime).append("'}\n");
 		
+
 		//sb.append("FCSeating: ").append(mFirstClassSeating).append(", ");
 		//sb.append("FCPrice: ").append("$").append(mFirstClassPrice).append(", ");
 		//sb.append("CSeating: ").append(mCoachSeating).append(", ").append("\n");
