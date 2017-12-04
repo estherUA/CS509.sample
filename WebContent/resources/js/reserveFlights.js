@@ -2,14 +2,16 @@ function reserveFlights() {
 	 console.log($('input[name="flightSelected"]:checked').val());
 	console.log("Workedddddd");
 	$("#loader").removeClass("hidden");
+	var flightNumbers = [];
+	var flightSeats = [];
 	
 	$.ajax({
-		url : 'GetUserServlet',
+		url : 'ReserveFlightServlet',
 		data : {
-			userName : $('#userName').val()
+			flightNumbers : $('input[name="flightSelected"]:checked').val()
 		},
 		success : function(responseText) {
-			$('#ajaxGetUserServletResponse').text(responseText);
+			$('#test').text(responseText);
 		}
 	});
 }

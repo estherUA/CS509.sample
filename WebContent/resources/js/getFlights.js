@@ -8,7 +8,8 @@ function getFlights() {
 			//arrivalDate : $('#arrivalDate').val(),
 			departureCode : $('#departCode').val().toUpperCase(),
 			arrivalCode : $('#arrivalCode').val().toUpperCase(),
-			departDate:  $('#departDate').val().replace(/-/g, '_')
+			departDate:  $('#departDate').val().replace(/-/g, '_'),
+			seating: $('input[name="seating"]:checked').val()
 		},
 		success : function(responseText) {
 			var res = responseText.slice(1, -1);

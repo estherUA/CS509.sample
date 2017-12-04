@@ -56,6 +56,13 @@
 				<label for="">Round Trip?</label>
 				<input type="checkbox" name="roundTrip" class="" id="roundTrip">
 			</div>
+			<div class="col-md-6 mb-3">
+				<label for="">First Class?</label>
+				<input type="radio" name="seating" class="" value="firstClass">
+				
+				<label for="">Coach?</label>
+				<input type="radio" name="seating" class="" value="coach">
+			</div>
 		</div>
 		<button class="btn btn-primary" id="returnFlights" type="submit" value="getFlights">Find Flights</button>
 		</form>
@@ -83,6 +90,7 @@
 				</tbody>
 			</table>
 			<button class="btn btn-success" id="reserveFlight">Reserve Flight</button>
+			<div id="test"></div>
 		</div>
 	</div>
 </div>
