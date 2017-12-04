@@ -6,6 +6,7 @@ import java.util.Iterator;
 import com.google.gson.Gson;
 
 import dao.ServerInterface;
+import reservation.ReserveFlight;
 
 public class FindFlights{
 	DepartureCache cache = new DepartureCache();
@@ -19,6 +20,8 @@ public class FindFlights{
 	String finalDestinationAirport = ""; 	// initialize with the arrival airport code
 	String currentAirport = "";
 	String teamName = "SmartDesign";
+
+
 	
 	public ArrayList<ValidFlights> getFlights(String departAirportCode, String arriveAirportCode, String departureDate) {
 	//public ArrayList<ValidStringFlights> getFlights(String departAirportCode, String arriveAirportCode, String departureDate) {
@@ -115,7 +118,7 @@ public class FindFlights{
 		return validFlightCollection;
 	}
 	
-	public Flights getDepartingFlightsFromServer (String airport, String date) {
+	public Flights getDepartingFlightsFromServer (String airport, String date){
 		Flights flights = ServerInterface.INSTANCE.getDepartingFlights(teamName, airport, date);
 		return flights;
 	}
