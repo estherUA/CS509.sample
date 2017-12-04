@@ -142,7 +142,7 @@ public class LocalTimeConverter {
 			//flight.departLocalTime(formatter.format(departureTimeMil));
 
 		} else {
-			return null;
+			return "";
 		}
 
 
