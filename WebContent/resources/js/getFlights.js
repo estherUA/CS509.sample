@@ -2,6 +2,9 @@ function getFlights() {
 	console.log("Worked");
 	$("#loader").removeClass("hidden");
 	$("#flightsTableBody").html(""); 
+	var departCode = $('#departCode').val().toUpperCase();
+	var arriveCode = $('#arrivalCode').val().toUpperCase();
+	var seating = $('input[name="seating"]:checked').val()
 	//,seating: $('input[name="seating"]:checked').val()
 	$.ajax({
 		url : 'GetFlightInfoServlet',
@@ -27,36 +30,33 @@ function getFlights() {
 					var replaceSingleQuote = str.replace(/'/g, '"');
 					var jsonData = JSON.parse(replaceSingleQuote);
 					var arrayOfFlight = [jsonData.FlightNumber];
+					var cost = 0;
+					if(seating == "coach"){
+						cost = jsonData.CPrice;
+					} else {
+						cost = jsonData.FCPrice;
+					}
 				flightString += "<tr>" +
 				"<td><input type='radio' name='flightSelected' value='" +arrayOfFlight+ "'>"  +
-				"</td><td>" +jsonData.Departure +
-				"</td><td>" +jsonData.Arrival +
-				"</td><td>" +jsonData.DepartureGMT +
-				"</td><td>" +jsonData.ArrivalGMT +
-				"</td><td>" +jsonData.FlightNumber + 
-				"</td><td>" +jsonData.FlightDuration +
-				"</td><td>" +jsonData.FCSeating + 
-				"</td><td>" +jsonData.CSeating +
-				"</td><td>" +jsonData.FCPrice + 
-				"</td><td>" +jsonData.CPrice +
-				"</td></tr>";
+				"</td><td><div class='alert' role='alert'><h4 class='alert-heading'>" +
+				departCode + " --> " + arriveCode + "</h4>" +
+				"<p> Departing " + jsonData.Departure + " " + jsonData.DepartureLocal + " --> " +
+				"Arriving " + jsonData.Arrival + " " + jsonData.ArrivalLocal + "</p>" +
+				"<p> Flight Duration: " + jsonData.FlightDuration + " minutes </p>" +
+				"<p> Cost: $" + cost + " </p>" +
+				
+				"</tr>";
 				}
+				
 				else if(temp > 1){
 					var connections = str.split("},");
-					var conDeparture = ""; 
-					var conArrival = "";
-					var conDepTime = ""; 
-					var conArrTime = "";
-					var conFlightNum = "";  
-					var conFlightDur = ""; 
-					var conFCSeat = "";  
-					var conCSeat = "";
-					var conFCPrice = "";  
-					var conCPrice = "";
+					var conFlightDur = 0; 
+					var conFCPrice = 0;  
+					var conCPrice = 0;
 					var arrayOfFlights = [];
-					
+//					
 					var initialString ="";
-					
+//					
 					for(var j=0; j<connections.length; j++){
 						var trim = connections[j].trim();
 						var lastChar = trim[trim.length -1 ];
@@ -69,45 +69,29 @@ function getFlights() {
 						var jsonData = JSON.parse(connection);
 						
 						arrayOfFlights.push(jsonData.FlightNumber);
-						 conDeparture += jsonData.Departure + "<hr>"; 
-						 conArrival += jsonData.Arrival + "<hr>";
-						 conDepTime += jsonData.DepartureGMT + "<hr>"; 
-						 conArrTime += jsonData.ArrivalGMT + "<hr>";
-						 conFlightNum += jsonData.FlightNumber + "<hr>";  
-						 conFlightDur += jsonData.FlightDuration + "<hr>"; 
-						 conFCSeat += jsonData.FCSeating + "<hr>";  
-						 conCSeat += jsonData.CSeating + "<hr>";
-						 conFCPrice += jsonData.FCPrice + "<hr>";  
-						 conCPrice += jsonData.CPrice + "<hr>";
-						 
-						 /*initialString += "<tr>" +
-							"<td>" +jsonData.Departure +
-							"</td><td>" +jsonData.Arrival +
-							"</td><td>" +jsonData.DepartureGMT +
-							"</td><td>" +jsonData.ArrivalGMT +
-							"</td><td>" +jsonData.FlightNumber + 
-							"</td><td>" +jsonData.FlightDuration +
-							"</td><td>" +jsonData.FCSeating + 
-							"</td><td>" +jsonData.CSeating +
-							"</td><td>" +jsonData.FCPrice + 
-							"</td><td>" +jsonData.CPrice +
-							"</td></tr>";
-							}*/
+						 conFlightDur += parseInt(jsonData.FlightDuration); 
+						 conFCPrice += parseInt(jsonData.FCPrice);  
+						 conCPrice += parseInt(jsonData.CPrice);
+
+						initialString += "<p> Departing " + jsonData.Departure + " " + jsonData.DepartureLocal + " --> " +
+							"Arriving " + jsonData.Arrival + " " + jsonData.ArrivalLocal + "</p>" 
 					}
 					
-					flightString += "<tr>" +
-					"<td><input type='radio' name='flightSelected' value='" +arrayOfFlights+ "'>"  +
-					"</td><td>" +conDeparture + 
-					"</td><td>" +conArrival +
-					"</td><td>" +conDepTime +
-					"</td><td>" +conArrTime +
-					"</td><td>" +conFlightNum + 
-					"</td><td>" +conFlightDur +
-					"</td><td>" +conFCSeat + 
-					"</td><td>" +conCSeat +
-					"</td><td>" +conFCPrice + 
-					"</td><td>" +conCPrice +
-					"</td></tr>";
+					 var cost = "";
+					if(seating == "coach"){
+						cost = conCPrice;
+					} else {
+						cost = conFCPrice;
+					}
+					
+					flightString +=  "<tr>" +
+					"<td><input type='radio' name='flightSelected' value='" +arrayOfFlight+ "'>"  +
+					"</td><td><div class='alert' role='alert'><h4 class='alert-heading'>" +
+					departCode + " --> " + arriveCode + "</h4>" +
+					initialString +
+					"<p> Total Flight Duration: " + conFlightDur + " minutes </p>" +
+					"<p> Total Cost: $" + cost + " </p>"
+					"</tr>";
 				}
 				
 				finalResult.push("Test");

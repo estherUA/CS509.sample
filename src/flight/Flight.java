@@ -186,20 +186,6 @@ public class Flight implements Comparable<Flight>, Comparator<Flight>{
 	 */
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
-
-		/*
-
-		
-		sb.append(mflightNumber).append(", ");
-
-		sb.append("FCSeating: ").append(mFirstClassSeating).append(", ");
-		sb.append("FCPrice: ").append("$").append(mFirstClassPrice).append(", ");
-		sb.append("CSeating: ").append(mCoachSeating).append(", ");
-		sb.append("CPrice: ").append("$").append(mCoachPrice).append(", ");
-		sb.append("DepartureGMT: ").append(mDepartFlightDateTime).append(", ");
-		sb.append("DepartLocalTime: ").append(mDepartLocalTime).append(", ");
-		sb.append("ArrivalGMT: ").append(mArrivalFlightDateTime).append(", ");
-		sb.append("ArrivalLocalTime: ").append(mArrivalLocalTime).append("}");//.append("\n");*/
 		
 		sb.append("{");
 		sb.append("'FlightNumber': '").append(mflightNumber).append("', ");
@@ -207,11 +193,13 @@ public class Flight implements Comparable<Flight>, Comparator<Flight>{
 		sb.append("'Departure': '").append(mDepartFlightCode).append("', ");
 		sb.append("'Arrival': '").append(mArrivalFlightCode).append("', ");
 		sb.append("'FCSeating': '").append(mFirstClassSeating).append("', ");
-		sb.append("'FCPrice': '").append("$").append(mFirstClassPrice).append("', ");
+		sb.append("'FCPrice': '").append(mFirstClassPrice).append("', ");
 		sb.append("'CSeating': '").append(mCoachSeating).append("', ");
-		sb.append("'CPrice': '").append("$").append(mCoachPrice).append("', ");
+		sb.append("'CPrice': '").append(mCoachPrice).append("', ");
 		sb.append("'DepartureGMT': '").append(mDepartFlightDateTime).append("', ");
-		sb.append("'ArrivalGMT': '").append(mArrivalFlightDateTime).append("'}\n");
+		sb.append("'DepartureLocal': '").append(mDepartLocalTime).append("', ");
+		sb.append("'ArrivalLocal': '").append(mArrivalLocalTime).append("', ");
+		sb.append("'ArrivalGMT': '").append(mArrivalFlightDateTime).append("'}");
 		
 
 		//sb.append("FCSeating: ").append(mFirstClassSeating).append(", ");

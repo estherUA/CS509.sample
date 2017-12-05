@@ -1,6 +1,7 @@
 package flight;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -8,6 +9,8 @@ import com.google.gson.Gson;
 
 import dao.ServerInterface;
 import reservation.ReserveFlight;
+import sorters.FlightDurationSorter;
+import sorters.PriceSorter;
 
 public class FindFlights {
 	DepartureCache cache = new DepartureCache();
@@ -22,10 +25,10 @@ public class FindFlights {
 	String finalDestinationAirport = "";    // initialize with the arrival airport code
 	String currentAirport = "";
 	String teamName = "SmartDesign";
+	String sortCriteria = "price";
 
-
-	public ArrayList<ValidFlights> getFlights(String departAirportCode, String arriveAirportCode, String departureDate) {
-
+	public ArrayList<ValidFlights> getFlights(String departAirportCode, String arriveAirportCode, String departureDate, String sortValue) {
+		sortCriteria = sortValue;
 		departureAirport = departAirportCode;
 		finalDestinationAirport = arriveAirportCode;
 		for (int leg = 0; leg < 3; leg++) {
@@ -106,6 +109,11 @@ public class FindFlights {
 
 	public Flights getDepartingFlightsFromServer(String airport, String date) {
 		Flights flights = ServerInterface.INSTANCE.getDepartingFlights(teamName, airport, date);
+		/*if(sortCriteria == "duration") {
+			Collections.sort(flights, new FlightDurationSorter());
+		} else if(sortCriteria == "price") {
+			Collections.sort(flights, new PriceSorter());
+		}*/
 		return flights;
 	}
   }

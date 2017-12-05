@@ -15,6 +15,8 @@ function reserveFlights() {
 		success : function(responseText) {
 			//$('#test').text(responseText);
 			$("#flightsTableBody").html("");
+			$("#displayTable").addClass("hidden");
+			$('#needs-validation')[0].reset()
 			$("#loader").addClass("hidden");
 			alert("Your Trip has been reserved!");
 		},

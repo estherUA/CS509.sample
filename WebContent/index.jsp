@@ -73,7 +73,8 @@
 				<thead class="thead-default">
 					<tr>
 						<th>Select</th>
-						<th>Departure City</th>
+						<th>Flight Details</th>
+						<!-- <th>Departure City</th>
 						<th>Arrival City</th>
 						<th>Departure Time</th>
 						<th>Arrival Time</th>
@@ -82,7 +83,7 @@
 						<th>First Class</th>
 						<th>Coach</th>
 						<th>First Class Price</th>
-						<th>Coach Price</th>
+						<th>Coach Price</th> -->
 					</tr>
 				</thead>
 				<tbody id="flightsTableBody">
@@ -90,7 +91,10 @@
 				</tbody>
 			</table>
 			<button class="btn btn-success" id="reserveFlight">Reserve Flight</button>
-			<div id="test"></div>
+			
+		</div>
+		<div id="test">
+			
 		</div>
 	</div>
 </div>

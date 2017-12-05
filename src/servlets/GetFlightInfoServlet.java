@@ -37,9 +37,13 @@ public class GetFlightInfoServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//String userName = request.getParameter("userName").trim();
 		String userName = "SmartDesign";
+		String sortValue = "price";
 		String departCode = request.getParameter("departureCode").trim();
 		String arrivalCode = request.getParameter("arrivalCode").trim();
 		String departDate = request.getParameter("departDate").trim();
+		/*if(request.getParameter("sortBy").trim() != null) {
+			sortValue = request.getParameter("sortBy").trim();
+		} */
 		
 		if(userName == null || "".equals(userName)){
 			userName = "Guest";
@@ -54,7 +58,7 @@ public class GetFlightInfoServlet extends HttpServlet {
 		System.out.println(flightsAndConnections);*/
 		
 		FindFlights allFlights = new FindFlights();
-		ArrayList<ValidFlights> directAndConnecting = allFlights.getFlights(departCode, arrivalCode, departDate);
+		ArrayList<ValidFlights> directAndConnecting = allFlights.getFlights(departCode, arrivalCode, departDate, sortValue);
 		System.out.println(directAndConnecting.toString());
 		
 		//String depart = "Test " + departCode + " " + arrivalCode + " " + departDate + " " + userName;

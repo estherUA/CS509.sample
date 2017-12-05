@@ -24,7 +24,9 @@ import java.util.HashMap;
 import airplane.Airplanes;
 import flight.LocalTimeConverter;
 import jdk.nashorn.internal.runtime.ECMAException;
+import reservation.Reservation;
 import reservation.ReserveFlight;
+import sorters.FlightDurationSorter;
 
 /**
  * @author blake
@@ -71,6 +73,7 @@ public class Driver {
 		String departureCode = args[1];
 		String departuredate = args[2];
 		String arrivalCode = args[3];
+		String sortValue = args[4];
 		Airports allAirports = ServerInterface.INSTANCE.getAirports(teamName);
 
 		//Try to get a list of airports
@@ -83,9 +86,16 @@ public class Driver {
 		LocalTimeConverter localtime = new LocalTimeConverter();
 
 		FindFlights allFlights = new FindFlights();
-		ArrayList<ValidFlights> directAndConnecting = allFlights.getFlights(departureCode, arrivalCode, departuredate);
+		ArrayList<ValidFlights> directAndConnecting = allFlights.getFlights(departureCode, arrivalCode, departuredate,sortValue);
+		
+		
+//		for (ValidFlights validFlights : directAndConnecting) {
+//			//for (Flight validFlight : validFlights) {
+//				Collections.sort(validFlights, new FlightDurationSorter());
+//			//}
+//		}
+		
 		System.out.println(directAndConnecting.toString());
-
 
 		ArrayList<String> flightnumber = new ArrayList<String>();
 		flightnumber.add("5066");
@@ -97,6 +107,12 @@ public class Driver {
 		//ReserveFlight.makeReservation(teamName, flightnumber, seating);
 		//String xmlflights = ReserveFlight.makeFlightXML(flightnumber, seating);
 		//ServerInterface.INSTANCE.reserveFlight(teamName, xmlflights);
+		
+		
+		//Flights rlist = ServerInterface.INSTANCE.getFlights(teamName, departureCode, departuredate, arrivalCode);
+		
+		//Collections.sort(rlist, new FlightDurationSorter());
+		
 	}
 
 
