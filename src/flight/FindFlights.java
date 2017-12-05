@@ -24,10 +24,10 @@ public class FindFlights {
 	String finalDestinationAirport = "";    // initialize with the arrival airport code
 	String currentAirport = "";
 	String teamName = "SmartDesign";
-	String sortCriteria = "price";
+	String sortVal = "price";
 
 	public ArrayList<ValidFlights> getFlights(String departAirportCode, String arriveAirportCode, String departureDate, String sortValue) {
-		sortCriteria = sortValue;
+		sortVal = sortValue;
 		departureAirport = departAirportCode;
 		finalDestinationAirport = arriveAirportCode;
 		for (int leg = 0; leg < 3; leg++) {

@@ -22,6 +22,7 @@ import org.xml.sax.SAXException;
 
 import java.io.StringWriter;
 import java.io.Writer;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,10 +90,32 @@ public class ReserveFlight {
 
     public static void makeReservation(String teamName,ArrayList<String> flightnumber, ArrayList<String> seating ) throws Exception {
         ServerInterface.INSTANCE.lock(teamName);
-        String xmlflights = makeFlightXML(flightnumber, seating);
-        ServerInterface.INSTANCE.reserveFlight(teamName, xmlflights);
+        if (flightnumber.size() <= 2){
+            String xmlflights = makeFlightXML(flightnumber, seating);
+            ServerInterface.INSTANCE.reserveFlight(teamName, xmlflights);
+
+        } else {
+            ArrayList<ArrayList<String>> flightNumber = partition_list(flightnumber);
+            ArrayList<ArrayList<String>> Seating = partition_list(seating);
+            for (int i = 0; i < flightNumber.size(); i++ ){
+                String xmlflight = makeFlightXML(flightNumber.get(i), Seating.get(i));
+                ServerInterface.INSTANCE.reserveFlight(teamName, xmlflight);
+            }
+
+        }
         ServerInterface.INSTANCE.unlock(teamName);
 
+    }
+
+    public static ArrayList<ArrayList<String>> partition_list(ArrayList<String> list) {
+        ArrayList<ArrayList<String>> decisionsBy2 = new ArrayList<ArrayList<String>>();
+
+        final int sizeOfList = list.size();
+        final int breakApart = 2;
+        for(int i = 0; i < sizeOfList; i += breakApart) {
+            decisionsBy2.add(new ArrayList<String>(list.subList(i, Math.min(sizeOfList, i + breakApart))));
+        }
+        return decisionsBy2;
     }
 
 }

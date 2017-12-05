@@ -200,16 +200,6 @@ public class Flight implements Comparable<Flight>, Comparator<Flight>{
 		sb.append("'DepartureLocal': '").append(mDepartLocalTime).append("', ");
 		sb.append("'ArrivalLocal': '").append(mArrivalLocalTime).append("', ");
 		sb.append("'ArrivalGMT': '").append(mArrivalFlightDateTime).append("'}");
-		
-
-		//sb.append("FCSeating: ").append(mFirstClassSeating).append(", ");
-		//sb.append("FCPrice: ").append("$").append(mFirstClassPrice).append(", ");
-		//sb.append("CSeating: ").append(mCoachSeating).append(", ").append("\n");
-		//sb.append("CPrice: ").append("$").append(mCoachPrice).append(", ");
-		//sb.append("Departure GMT: ").append(mDepartFlightDateTime).append(", ");
-		//sb.append("Depart LocalTime: ").append(mDepartLocalTime).append(", ");
-		//sb.append("Arrival GMT: ").append(mArrivalFlightDateTime).append(", ");
-		//sb.append("Arrival LocalTime: ").append(mArrivalLocalTime).append("\n");
 
 		return sb.toString();
 	}

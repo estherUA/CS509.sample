@@ -26,7 +26,8 @@ import flight.LocalTimeConverter;
 import jdk.nashorn.internal.runtime.ECMAException;
 import reservation.Reservation;
 import reservation.ReserveFlight;
-import sorters.FlightDurationSorter;
+import sorting.SortbyDepartureTime;
+
 
 /**
  * @author blake
@@ -42,15 +43,7 @@ public class Driver {
 	 *
 	 * @param args is the arguments passed to java vm in format of "CS509.sample teamName" where teamName is a valid team
 	 */
-	ArrayList<String> mylist = new ArrayList<String>();
-	public ArrayList<String> flightnumber(){
-		mylist.add("5063");
-		return mylist;
-	}
-	public ArrayList<String> seating(){
-		mylist.add("firstClass");
-		return mylist;
-	}
+
 
 
 
@@ -86,21 +79,18 @@ public class Driver {
 		LocalTimeConverter localtime = new LocalTimeConverter();
 
 		FindFlights allFlights = new FindFlights();
-		ArrayList<ValidFlights> directAndConnecting = allFlights.getFlights(departureCode, arrivalCode, departuredate,sortValue);
-		
-		
-//		for (ValidFlights validFlights : directAndConnecting) {
-//			//for (Flight validFlight : validFlights) {
-//				Collections.sort(validFlights, new FlightDurationSorter());
-//			//}
-//		}
-		
+		ArrayList<ValidFlights> directAndConnecting = allFlights.getFlights(departureCode, arrivalCode, departuredate, sortValue);
+		Collections.sort(directAndConnecting, new SortbyDepartureTime());
+
+
 		System.out.println(directAndConnecting.toString());
 
 		ArrayList<String> flightnumber = new ArrayList<String>();
-		flightnumber.add("5066");
-		flightnumber.add("43901");
+		flightnumber.add("5960");
+		flightnumber.add("8293");
+		flightnumber.add("5962");
 		ArrayList<String> seating = new ArrayList<String>();
+		seating.add("Coach");
 		seating.add("Coach");
 		seating.add("Coach");
 
@@ -112,7 +102,7 @@ public class Driver {
 		//Flights rlist = ServerInterface.INSTANCE.getFlights(teamName, departureCode, departuredate, arrivalCode);
 		
 		//Collections.sort(rlist, new FlightDurationSorter());
-		
+
 	}
 
 
