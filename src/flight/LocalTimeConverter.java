@@ -124,7 +124,7 @@ public class LocalTimeConverter {
 
 
 
-		DateFormat formatter= new SimpleDateFormat("MM/dd/yyyy HH:mm:ss Z");
+		DateFormat formatter= new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 		Date departureTime = new Date(flightdatetime);
 
 		long departureTimeMil = departureTime.getTime();

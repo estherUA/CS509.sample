@@ -27,6 +27,9 @@ import airplane.Airplanes;
 import flight.LocalTimeConverter;
 import jdk.nashorn.internal.runtime.ECMAException;
 import reservation.ReserveFlight;
+import sorting.SortbyArrivalTime;
+import sorting.SortbyDepartureTime;
+import sorting.SortbyTravelTime;
 
 /**
  * @author blake
@@ -42,15 +45,7 @@ public class Driver {
 	 *
 	 * @param args is the arguments passed to java vm in format of "CS509.sample teamName" where teamName is a valid team
 	 */
-	ArrayList<String> mylist = new ArrayList<String>();
-	public ArrayList<String> flightnumber(){
-		mylist.add("5063");
-		return mylist;
-	}
-	public ArrayList<String> seating(){
-		mylist.add("firstClass");
-		return mylist;
-	}
+
 
 
 
@@ -86,19 +81,26 @@ public class Driver {
 
 		FindFlights allFlights = new FindFlights();
 		ArrayList<ValidFlights> directAndConnecting = allFlights.getFlights(departureCode, arrivalCode, departuredate);
+		Collections.sort(directAndConnecting, new SortbyDepartureTime());
+
 		System.out.println(directAndConnecting.toString());
 
 
 		ArrayList<String> flightnumber = new ArrayList<String>();
-		flightnumber.add("5066");
-		flightnumber.add("43901");
+		flightnumber.add("5960");
+		flightnumber.add("8293");
+		flightnumber.add("5962");
 		ArrayList<String> seating = new ArrayList<String>();
+		seating.add("Coach");
 		seating.add("Coach");
 		seating.add("Coach");
 
 		//ReserveFlight.makeReservation(teamName, flightnumber, seating);
 		//String xmlflights = ReserveFlight.makeFlightXML(flightnumber, seating);
 		//ServerInterface.INSTANCE.reserveFlight(teamName, xmlflights);
+
+		//Collections.sort(directAndConnecting, new SortbyDepartureTime());
+
 	}
 
 
