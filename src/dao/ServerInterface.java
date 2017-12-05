@@ -17,6 +17,7 @@ import airport.Airports;
 import flight.Flight;
 import flight.Flights;
 import flight.connectingFlights;
+import reservation.Reservations;
 import airplane.Airplanes;
 import utils.QueryFactory;
 
@@ -302,7 +303,7 @@ public enum ServerInterface {
 	
 	/*
 	 */ 
-	 	public Flights getFlights (String teamName, String departureAirportCode, String date, String destinationAirportCode) {
+	 	public Reservations getFlights (String teamName, String departureAirportCode, String date, String destinationAirportCode) {
 
 		URL url;
 		HttpURLConnection connection;
@@ -391,11 +392,11 @@ public enum ServerInterface {
 		
 		connectingFlights calculateConnectingFlights = new connectingFlights();
 		Flights finalFlights = new Flights();
-		finalFlights = calculateConnectingFlights.getConnectingFlights(departureAirportCode, destinationAirportCode, departingFlights, arrivingFlights, teamName, date);
+		Reservations rlist = calculateConnectingFlights.getConnectingFlights(departureAirportCode, destinationAirportCode, departingFlights, arrivingFlights, teamName, date);
 		
 		//Some magic happens here
 		
-		return finalFlights;
+		return rlist;
 		
 	}
 	 /* */

@@ -3,6 +3,7 @@ package flight;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -10,14 +11,17 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Stack;
 import java.util.TimeZone;
-
+import Sorting.FlightTimeSort;
+import Sorting.FlightDurationSorter;
+import Sorting.PriceSorter;
 import flight.Flight;
 import flight.Flights;
-
+import reservation.Reservation;
+import reservation.Reservations;
 import dao.ServerInterface;
 
 public class connectingFlights {	
-	public Flights getConnectingFlights(String departingAirport, String arrivalAirport, Flights departingFlights, Flights arrivingFlights, String teamName, String departureDate) {
+	public Reservations getConnectingFlights(String departingAirport, String arrivalAirport, Flights departingFlights, Flights arrivingFlights, String teamName, String departureDate) {
 		
 		ArrayList<Flights> connectedFlights= new ArrayList<Flights>();
 		Flights directFlights = new Flights();
@@ -31,7 +35,7 @@ public class connectingFlights {
 			if (departCode.equalsIgnoreCase(arrivalAirport)) {
 				directFlights.add(departingFlights.get(i));
 			}
-			System.out.println("Here: " + departingFlights.get(i));
+			//System.out.println("Here: " + departingFlights.get(i));
 		}
 		if(directFlights.isEmpty()) {
 			 for (int i = 0; i < departingFlights.size(); i++) {
@@ -81,7 +85,23 @@ public class connectingFlights {
 				}
 			}
 		}
-		System.out.println("List all the connected flights!" + connectedFlights);
-		return directFlights;
+		//convert to objects of reservation class
+		Reservations rlist=new Reservations();
+		for(int i=0;i<directFlights.size();i++) {
+			Flights temp=new Flights();
+			temp.add(directFlights.get(i));
+			rlist.add(new Reservation(temp));
+		}
+		
+		//sort for Price
+		Collections.sort(rlist,new PriceSorter());
+		Collections.sort(rlist,new FlightTimeSort());
+		Collections.sort(rlist,new FlightDurationSorter());
+		
+		
+		return rlist;
+		
+		
+		
 	}
 }

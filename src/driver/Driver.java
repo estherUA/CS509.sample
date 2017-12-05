@@ -9,12 +9,14 @@ import java.util.Collections;
 import airplane.Airplane;
 import airport.Airport;
 import airport.Airports;
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import dao.ServerInterface;
 import flight.Flight;
+import flight.FlightTimeSort;
 import flight.Flights;
+import reservation.Reservation;
+import reservation.Reservations;
 import airplane.Airplanes;
-
+import Sorting.FlightTimeSort;
 /**
  * @author blake
  *
@@ -87,9 +89,10 @@ public class Driver {
 //		System.out.println(flightnumber);
 
 
-		Flights flights = ServerInterface.INSTANCE.getFlights(teamName, departureCode, departuredate, arrivalCode);
-		for (Flight flight : flights) {
-			System.out.println(flight.toString());}
+		Reservations rlist = ServerInterface.INSTANCE.getFlights(teamName, departureCode, departuredate, arrivalCode);
+		
+		for (Reservation reservation : rlist) {
+			System.out.println(reservation.getOption().get(0));}
 
 		/*Airplanes airplanes = ServerInterface.INSTANCE.getAirplanes(teamName);
 		Collections.sort(airplanes);
