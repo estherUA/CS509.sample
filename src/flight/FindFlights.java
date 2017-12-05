@@ -88,7 +88,7 @@ public class FindFlights {
 					}
 					for (Flight flight : departingFlights) {
 						if(flight.arrivalFlightCode().equalsIgnoreCase(finalDestinationAirport)){
-							if(twoStopConnections.validConnection(flight) && twoStopConnections.size() < 3){
+							if(twoStopConnections.validConnection(flight) && twoStopConnections.size() <= 3){
 								twoStopConnections.add(flight);
 								validFlightCollection.add(twoStopConnections);
 							}
