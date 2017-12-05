@@ -52,10 +52,10 @@
 				Please provide a valid state.
 				</div>
 			</div>
-			<div class="col-md-6 mb-3">
+			<!--  div class="col-md-6 mb-3">
 				<label for="">Round Trip?</label>
 				<input type="checkbox" name="roundTrip" class="" id="roundTrip">
-			</div>
+			</div-->
 			<div class="col-md-6 mb-3">
 				<label for="">First Class?</label>
 				<input type="radio" name="seating" class="" value="firstClass">
@@ -127,7 +127,14 @@
 			});
 			
 			$("#reserveFlight").click(function() {
-				reserveFlights();
+				var r = confirm("Are you sure you want to reserve this trip?");
+				if (r == true) {
+					reserveFlights();
+					console.log("You pressed OK!");
+				} else {
+					console.log("You pressed Cancel!");
+				}
+				
 			});
 
 			$("#departDate").on("keydown", function(){

@@ -68,6 +68,12 @@ public class QueryFactory {
 		return "team=" + teamName + "&action=buyTickets&flightData=" + xmlFlights;
 	}*/
 
+
+	//public static String reserveSeats(String teamName, String xmlFlights) {
+		// TODO Auto-generated method stub
+		//return "team=" + teamName + "&action=buyTickets&flightData=" + xmlFlights;
+	//}
+
 	public static String reserveSeats(String teamName, String xmlFlights) {
 		// TODO Auto-generated method stub
 		return "team=" + teamName + "&action=buyTickets&flightData=" + xmlFlights;

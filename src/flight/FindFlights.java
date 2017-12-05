@@ -10,6 +10,10 @@ import com.google.gson.Gson;
 import dao.ServerInterface;
 import reservation.ReserveFlight;
 import sorting.CoachPriceSorter;
+import sorting.FirstClassPriceSorter;
+import sorting.SortbyArrivalTime;
+import sorting.SortbyDepartureTime;
+import sorting.SortbyTravelTime;
 
 public class FindFlights {
 	DepartureCache cache = new DepartureCache();
@@ -103,30 +107,26 @@ public class FindFlights {
 
 
 		}
-		if(sortValue == "coachPrice") {
+		System.out.println("In findflights before sorting" + validFlightCollection);
+		if(sortValue.equalsIgnoreCase("coachPrice")) {
 			Collections.sort(validFlightCollection, new CoachPriceSorter());
-		} else if (sortValue == "firstClassPrice") {
-			
-		} else if (sortValue == "flightDuration") {
-			
-		} else if (sortValue == "departureTime") {
-			
-		} else if (sortValue == "arrivalTime") {
-			
+		} else if (sortValue.equalsIgnoreCase("firstClassPrice")) {
+			Collections.sort(validFlightCollection, new FirstClassPriceSorter());
+		} else if (sortValue.equalsIgnoreCase("flightDuration")) {
+			Collections.sort(validFlightCollection, new SortbyTravelTime());
+		} else if (sortValue.equalsIgnoreCase("departureTime")) {
+			Collections.sort(validFlightCollection, new SortbyDepartureTime());
+		} else if (sortValue.equalsIgnoreCase("arrivalTime")) {
+			Collections.sort(validFlightCollection, new SortbyArrivalTime());
 		} else {
 			Collections.sort(validFlightCollection, new CoachPriceSorter());
 		}
-		
+		System.out.println("In findflights after sorting" + validFlightCollection);
 		return validFlightCollection;
 	}
 
 	public Flights getDepartingFlightsFromServer(String airport, String date) {
 		Flights flights = ServerInterface.INSTANCE.getDepartingFlights(teamName, airport, date);
-		/*if(sortCriteria == "duration") {
-			Collections.sort(flights, new FlightDurationSorter());
-		} else if(sortCriteria == "price") {
-			Collections.sort(flights, new PriceSorter());
-		}*/
 		return flights;
 	}
   }

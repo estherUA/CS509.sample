@@ -51,6 +51,8 @@ function getFlights(sortVal) {
 				
 				else if(temp > 1){
 					var connections = str.split("},");
+					var departureTimeFirstLeg = "";
+					var arrivalTimeLastLeg = ""
 					var conFlightDur = 0; 
 					var conFCPrice = 0;  
 					var conCPrice = 0;
@@ -69,6 +71,16 @@ function getFlights(sortVal) {
 						var connection = con.replace(/'/g, '"');
 						var jsonData = JSON.parse(connection);
 						
+						// Get Departure Date of the first leg and the arrival date time of the last leg
+						if (j==0){
+							departureTimeFirstLeg = jsonData.DepartureLocal;
+							console.log("depart first leg: " + departureTimeFirstLeg);
+						} 
+						if(j == connections.length - 1){
+							arrivalTimeLastLeg = jsonData.ArrivalLocal;
+							console.log("Arrive last leg: " + arrivalTimeLastLeg);
+						}
+						
 						arrayOfFlights.push(jsonData.FlightNumber);
 						 conFlightDur += parseInt(jsonData.FlightDuration); 
 						 conFCPrice += parseInt(jsonData.FCPrice);  
@@ -85,12 +97,24 @@ function getFlights(sortVal) {
 						cost = conFCPrice;
 					}
 					
+					var departureTime = new Date(departureTimeFirstLeg);
+					var departureTimeMil = departureTime.getTime();
+
+			        var arrivalTime = new Date(arrivalTimeLastLeg);
+			        var arrivalTimeMil = arrivalTime.getTime();
+
+			        var diff = arrivalTimeMil - departureTimeMil;
+			        //long diffMinutes = diff/(60 * 1000) % 60;
+			        conFlightDur =  Math.floor(diff / 60000);
+			        var hours = Math.floor( conFlightDur / 60);          
+			        var minutes = conFlightDur % 60;
+					
 					flightString +=  "<tr>" +
-					"<td><input type='radio' name='flightSelected' value='" +arrayOfFlight+ "'>"  +
+					"<td><input type='radio' name='flightSelected' value='" +arrayOfFlights+ "'>"  +
 					"</td><td><div class='alert' role='alert'><h4 class='alert-heading'>" +
 					departCode + " --> " + arriveCode + "</h4>" +
 					initialString +
-					"<p> Total Flight Duration: " + conFlightDur + " minutes </p>" +
+					"<p> Total Flight Duration: " + hours+ " hours "+ minutes + " minutes </p>" +
 					"<p> Total Cost: $" + cost + " </p>"
 					"</tr>";
 				}
