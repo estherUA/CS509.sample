@@ -1,15 +1,16 @@
-function getFlights() {
+function getFlights(sortVal) {
 	console.log("Worked");
 	$("#loader").removeClass("hidden");
 	$("#flightsTableBody").html(""); 
 	var departCode = $('#departCode').val().toUpperCase();
 	var arriveCode = $('#arrivalCode').val().toUpperCase();
-	var seating = $('input[name="seating"]:checked').val()
+	var seating = $('input[name="seating"]:checked').val();
 	//,seating: $('input[name="seating"]:checked').val()
 	$.ajax({
 		url : 'GetFlightInfoServlet',
 		data : {
 			//arrivalDate : $('#arrivalDate').val(),
+			sortValue: sortVal,
 			departureCode : $('#departCode').val().toUpperCase(),
 			arrivalCode : $('#arrivalCode').val().toUpperCase(),
 			departDate:  $('#departDate').val().replace(/-/g, '_')
@@ -109,3 +110,4 @@ function getFlights() {
 		}
 	});
 }
+

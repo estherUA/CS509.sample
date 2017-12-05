@@ -9,8 +9,7 @@ import com.google.gson.Gson;
 
 import dao.ServerInterface;
 import reservation.ReserveFlight;
-import sorters.FlightDurationSorter;
-import sorters.PriceSorter;
+import sorting.CoachPriceSorter;
 
 public class FindFlights {
 	DepartureCache cache = new DepartureCache();
@@ -104,6 +103,20 @@ public class FindFlights {
 
 
 		}
+		if(sortValue == "coachPrice") {
+			Collections.sort(validFlightCollection, new CoachPriceSorter());
+		} else if (sortValue == "firstClassPrice") {
+			
+		} else if (sortValue == "flightDuration") {
+			
+		} else if (sortValue == "departureTime") {
+			
+		} else if (sortValue == "arrivalTime") {
+			
+		} else {
+			Collections.sort(validFlightCollection, new CoachPriceSorter());
+		}
+		
 		return validFlightCollection;
 	}
 

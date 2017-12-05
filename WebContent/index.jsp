@@ -61,7 +61,7 @@
 				<input type="radio" name="seating" class="" value="firstClass">
 				
 				<label for="">Coach?</label>
-				<input type="radio" name="seating" class="" value="coach">
+				<input type="radio" name="seating" class="" value="coach" checked="checked">
 			</div>
 		</div>
 		<button class="btn btn-primary" id="returnFlights" type="submit" value="getFlights">Find Flights</button>
@@ -69,6 +69,13 @@
 		</div>
 		<div id="loader" class="hidden"></div>
 		<div id="displayTable" class="container hidden">
+			<div id="sortingOptions">
+				<label>Sort By:</label>
+				<button type="button" class="btn btn-outline-primary" id="price">Price</button>
+				<button type="button" class="btn btn-outline-secondary" id="duration">Flight Duration</button>
+				<button type="button" class="btn btn-outline-success" id="departureTime">Departure Time</button>
+				<button type="button" class="btn btn-outline-info" id="arrivalTime">Arrival Time</button>
+			</div>
 			<table class="table table-bordered">
 				<thead class="thead-default">
 					<tr>
@@ -107,7 +114,8 @@
 				if($('#departCode').val().toLowerCase() == $('#arrivalCode').val().toLowerCase()) {
 					alert("Departure Aiport and Arrival Airport can't be the same");
 				}
-				getFlights();
+				var sortVal = "coachPrice"
+				getFlights(sortVal);
 			});
 			
 			$( "#roundTrip" ).click(function() {
@@ -127,6 +135,26 @@
 				$(".departure-date-feedback").removeClass('hidden');
 				setTimeout(function() { $(".departure-date-feedback").addClass('hidden'); }, 2500);
 				console.log("clicked");
+			});
+			
+			$("#price").on("click", function(){
+				var seating = $('input[name="seating"]:checked').val();
+				var sortVal ="";
+				if(seating == "coach"){
+					getFlights("coachPrice");
+				} else {
+					getFlights("firstClassPrice");
+				}
+			});
+			
+			$("#duration").on("click", function(){
+				getFlights("flightDuration");			
+			});
+			$("#departureTime").on("click", function(){
+				getFlights("departureTime");
+			});
+			$("#arrivalTime").on("click", function(){
+				getFlights("arrivalTime");
 			});
 		});
 	</script>
