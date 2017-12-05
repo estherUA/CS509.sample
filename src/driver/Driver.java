@@ -27,6 +27,9 @@ import airplane.Airplanes;
 import flight.LocalTimeConverter;
 import jdk.nashorn.internal.runtime.ECMAException;
 import reservation.ReserveFlight;
+import sorting.SortbyArrivalTime;
+import sorting.SortbyDepartureTime;
+import sorting.SortbyTravelTime;
 
 /**
  * @author blake
@@ -78,6 +81,8 @@ public class Driver {
 
 		FindFlights allFlights = new FindFlights();
 		ArrayList<ValidFlights> directAndConnecting = allFlights.getFlights(departureCode, arrivalCode, departuredate);
+		Collections.sort(directAndConnecting, new SortbyDepartureTime());
+
 		System.out.println(directAndConnecting.toString());
 
 
@@ -93,6 +98,9 @@ public class Driver {
 		//ReserveFlight.makeReservation(teamName, flightnumber, seating);
 		//String xmlflights = ReserveFlight.makeFlightXML(flightnumber, seating);
 		//ServerInterface.INSTANCE.reserveFlight(teamName, xmlflights);
+
+		//Collections.sort(directAndConnecting, new SortbyDepartureTime());
+
 	}
 
 
