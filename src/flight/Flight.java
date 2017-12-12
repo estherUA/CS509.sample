@@ -16,28 +16,16 @@ public class Flight implements Comparable<Flight>, Comparator<Flight>{
 	private int mflightDuration;
 
 	private String mDepartFlightCode;
-	//? sort by time?
 	private String mDepartFlightDateTime;
 	private String mArrivalFlightCode;
-	//sort by time?
 	private String mArrivalFlightDateTime;
 
-	//initiate seating as integer
-//	private String mFirstClassSeating;
-//	private String mCoachSeating;
 	private int mFirstClassSeating;
 	private int mCoachSeating;
 
-	//initiate price as double
-//	private String mFirstClassPrice;
-//	private String mCoachPrice;
 	private double mFirstClassPrice;
 	private double mCoachPrice;
 
-
-	
-	//private FlightDetails mDepartFlight;
-	//private FlightDetails mArriveFlight;
 	private String mDepartLocalTime;
 	private String mArrivalLocalTime;
 

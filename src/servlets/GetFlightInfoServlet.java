@@ -34,16 +34,11 @@ public class GetFlightInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//String userName = request.getParameter("userName").trim();
 		String userName = "SmartDesign";
 		String sortValue = request.getParameter("sortValue").trim();;
 		String departCode = request.getParameter("departureCode").trim();
 		String arrivalCode = request.getParameter("arrivalCode").trim();
 		String departDate = request.getParameter("departDate").trim();
-		/*if(request.getParameter("sortBy").trim() != null) {
-			sortValue = request.getParameter("sortBy").trim();
-		} */
 		
 		
 		FindFlights allFlights = new FindFlights();

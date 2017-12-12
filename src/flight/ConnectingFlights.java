@@ -16,8 +16,6 @@ import flight.Flight;
 import flight.Flights;
 import airplane.Airplane;
 
-
-//public class ConnectingFlights extends ArrayList<ConnectingFlight> {
 public class ConnectingFlights extends ArrayList<Flight> {
 	/**
 	 * 
@@ -25,9 +23,6 @@ public class ConnectingFlights extends ArrayList<Flight> {
 	private static final long serialVersionUID = 1L;
 	int lastAdded = this.size() - 1;
 
-	//String destinationAirportCode;
-	
-	//ArrayList <Flight>connectedFlights = new ArrayList<Flight>();
 	SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss Z");
 	//?
 	ConnectingFlights() {
@@ -70,7 +65,6 @@ public class ConnectingFlights extends ArrayList<Flight> {
 					return true;
 				}
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -91,22 +85,8 @@ public class ConnectingFlights extends ArrayList<Flight> {
 				return false;
 			} else
 				return true;
-
-
-
 	}
 
-
-	/* add a connection to the connections with error processing
-		the method will throw if the flight is not a validConnection
-	*/
-//	public void add(Flight flight) throws IllegalArgumentException {
-//		if(validConnection(flight)) {
-//			//ConnectingFlight newConnection = (ConnectingFlight) flight;
-//			this.add(flight);
-//			System.out.println("Here");
-//		}
-//	}
 
 	/* return the 3-char airport code of the current destination
 	*/

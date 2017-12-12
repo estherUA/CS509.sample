@@ -30,11 +30,11 @@
 			<div class="row">
 				<div class="col-md-6 mb-3">
 					<label for="validationCustom01">Departure Airport</label>
-					<input type="text" name="departureAirport" class="form-control" id="departCode" maxlength="3" value="BOS" required>
+					<input type="text" name="departureAirport" class="form-control" id="departCode" maxlength="3" value="" required>
 				</div>
 				<div class="col-md-6 mb-3">
 					<label for="validationCustom02">Arrival Airport</label>
-					<input type="text" name="arrivalAirport" class="form-control" id="arrivalCode" maxlength="3" value="JFK" required>
+					<input type="text" name="arrivalAirport" class="form-control" id="arrivalCode" maxlength="3" value="" required>
 				</div>
 			</div>
 			<div class="row">
@@ -52,10 +52,10 @@
 				Please provide a valid state.
 				</div>
 			</div>
-			<!--  div class="col-md-6 mb-3">
+			<div class="col-md-6 mb-3">
 				<label for="">Round Trip?</label>
 				<input type="checkbox" name="roundTrip" class="" id="roundTrip">
-			</div-->
+			</div>
 			<div class="col-md-6 mb-3">
 				<label for="">First Class?</label>
 				<input type="radio" name="seating" class="" value="firstClass">
@@ -81,16 +81,6 @@
 					<tr>
 						<th>Select</th>
 						<th>Flight Details</th>
-						<!-- <th>Departure City</th>
-						<th>Arrival City</th>
-						<th>Departure Time</th>
-						<th>Arrival Time</th>
-						<th>Flight Number</th>
-						<th>Flight Duration</th>
-						<th>First Class</th>
-						<th>Coach</th>
-						<th>First Class Price</th>
-						<th>Coach Price</th> -->
 					</tr>
 				</thead>
 				<tbody id="flightsTableBody">
@@ -113,9 +103,11 @@
 				console.log("Departure: ", $('#departCode').val());
 				if($('#departCode').val().toLowerCase() == $('#arrivalCode').val().toLowerCase()) {
 					alert("Departure Aiport and Arrival Airport can't be the same");
+				}else{
+					var sortVal = "coachPrice"
+					getFlights(sortVal);
 				}
-				var sortVal = "coachPrice"
-				getFlights(sortVal);
+				
 			});
 			
 			$( "#roundTrip" ).click(function() {
